@@ -1,0 +1,9 @@
+{
+  "name": "@pnpmkambrium-cm4all-wp-impex/gh-pages",
+  "version": "1.0.0",
+  "description": "documentation of the WordPress ImpEx plugin",
+  "author": {
+    "email": "lars.gersmann@cm4all.com",
+    "name": "lars gersmann"
+  }
+}
