@@ -1,0 +1,43 @@
+{
+  "name": "cm4all-wp-impex",
+  "private": "true",
+  "version": "1.0.0",
+  "description": "test repo for migrating impex to pnpmkambrium",
+  "scripts": {
+    "prepare": "npx -y only-allow pnpm && (make --silent init || echo \"failed to initialize @pnpmkambrium/core : please run 'make --silent -f node_modules/@pnpmkambrium/core/make/make.mk init  manually'\")"
+  },
+  "keywords": [
+    "pnpm"
+  ],
+  "author": {
+    "email": "lars.gersmann@cm4all.com",
+    "name": "lars gersmann"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lgersman/pnpmkambrium-cm4all-wp-impex"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@changesets/cli": "2.26.1",
+    "@commitlint/cli": "17.5.1",
+    "@commitlint/config-conventional": "17.4.4",
+    "@pnpmkambrium/core": "link:../pnpmkambrium/packages/npm/core",
+    "@pnpmkambrium/create": "link:../pnpmkambrium/packages/npm/create",
+    "@prettier/plugin-php": "^0.19.4",
+    "eslint": "8.27.0",
+    "eslint-config-prettier": "8.8.0",
+    "eslint-plugin-import": "2.27.5",
+    "eslint-plugin-prettier": "4.2.1",
+    "eslint-plugin-react": "7.32.2",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-simple-import-sort": "10.0.0",
+    "git-cz": "4.9.0",
+    "nano-staged": "0.8.0",
+    "prettier": "2.8.7",
+    "stylelint": "^15.4.0",
+    "stylelint-config-prettier": "^9.0.5",
+    "stylelint-config-recommended-scss": "^9.0.1",
+    "stylelint-scss": "^4.6.0"
+  }
+}

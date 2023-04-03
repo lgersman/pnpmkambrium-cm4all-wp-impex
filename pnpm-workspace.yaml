@@ -1,0 +1,8 @@
+# see https://pnpm.io/pnpm-workspace_yaml
+packages:
+  - '.'
+  - 'packages/npm/*'
+  - 'packages/docker/*'
+  - 'packages/docs/*'
+  - 'packages/wp-plugin/*'
+  - 'packages/wp-theme/*'
