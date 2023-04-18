@@ -4,3 +4,4 @@
 .changeset/*
 .vscode/*
 /.pnpm-store
+/packages/docs/gh-pages/book
