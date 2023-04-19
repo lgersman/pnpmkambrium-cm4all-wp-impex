@@ -5,3 +5,4 @@
 .vscode/*
 /.pnpm-store
 /packages/docs/gh-pages/book
+/packages/npm/generator/examples
