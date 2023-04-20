@@ -1,0 +1,118 @@
+=== ${PLUGIN_NAME} ===
+Contributors:      ${CONTRIBUTORS}
+Plugin Name:       ${PLUGIN_NAME}
+Plugin URI:        ${PLUGIN_URI}
+Tags:              ${TAGS}
+Requires at least: ${REQUIRES_AT_LEAST}
+Tested up to:      ${TESTED_UP_TO}
+Stable tag:        ${VERSION}
+Version:           ${VERSION}
+Requires PHP:      ${REQUIRES_PHP}
+License:           GPLv2 or later
+License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+Author:            ${AUTHOR}
+Author URI:        ${AUTHOR_URI}
+
+${DESCRIPTION}
+
+== Description ==
+
+ImpEx is a WordPress plugin that allows you to import and export data from and to your WordPress installation.
+
+The primary goal for ImpEx is to provide a **true Open Source WordPress Plugin** for importing/exporting your WordPress data (including data from third-party plugins/themes).
+
+**This plugin is in an early (but working) stage.**
+
+Impex provides : 
+
+* WordPress hooks for third-party plugins to expose their own data to ImpEx Import / Export without being dependent on Impex.
+
+* a (semi) streaming architecture for large data exports/imports.
+
+* Definition of configurable import/export profiles defining data providers to use and configuration of these data providers
+
+  * A user interface for importing / exporting data via ImpEx WP admin screen
+
+* the ImpEx API is designed to support resumable/cancelable imports and exports.
+
+* ImpEx provides a REST API integrated into WordPress
+
+* ImpEx is explicitly designed for use in managed WordPress instances
+
+* ImpEx development relies heavily on PHP unit testing its feature set to be stable and consistent.
+
+* a [CLI](https://ionos-wordpress.github.io/cm4all-wp-impex/impex-cli.html) for importing/exporting data via ImpEx REST interface.
+  The ImpEx CLI can be used as an alternative to the ImpEx WP admin screen. 
+
+* related NPM package [@cm4all-wp-impex/generator](https://www.npmjs.com/package/@cm4all-wp-impex/generator) enabling transformation of any content to Impex Export format.
+  
+  Using this package you're able to convert any content to WordPress and import it using the ImpEx plugin. See the [Tutorial](https://ionos-wordpress.github.io/cm4all-wp-impex/cm4all-wp-impex-generator/static-website-tutorial.html) 
+  or [watch the walk-trough at YouTube](https://www.youtube.com/watch?v=pjG69RmULYo).
+
+**Your help is welcome !!**
+
+== Frequently Asked Questions ==
+
+Impex uses modern browser features as building blocks. 
+
+Right know some of them might not be available in some browsers : 
+
+- [File System Access API](https://web.dev/file-system-access/) to export and import data to the local filesystem. This browser feature is mandatory.
+
+  Right now Chromium based browsers (except of Brave who disabled this feature) and Safari supporting the [File System Access API](https://web.dev/file-system-access/). 
+
+  > As of now, it's unclear if and when Firefox will support the [File System Access API](https://web.dev/file-system-access/). 
+
+  As an alternative you can use the [ImpEx CLI](./impex-cli.html) to trigger import/export operations on the commandline.
+
+- Depending on your browser version the Crypto API feature we use (`window.crypto.randomUUID`) may not be supported by your browser. 
+
+  As of now, [all "green" browser support it](https://developer.mozilla.org/en-US/docs/Web/API/Crypto/randomUUID). 
+
+  But if you use an older version of a browser it might happen that Impex will not work since the browser feature is not available in your browser.
+
+= Where can I find the ImpEx documentation ? =
+
+Documentation available at the [Impex plugin GitHub pages](https://ionos-wordpress.github.io/cm4all-wp-impex/)
+
+Please file bugs and feature requests at the [Impex plugin GitHub issues](https://github.com/IONOS-WordPress/cm4all-wp-impex/issues)
+
+= Why ImpE written in PHP 8 ? =
+
+Because PHP 8 
+
+* is much faster than any previous PHP Version
+
+* allows a much cleaner PHP code
+
+The plugin version available here (at WordPress plugin directory) is transpiled down to PHP 7.4
+
+If you prefer to use the PHP 8 version, you can download it from the [ImpEx WordPress plugin GitHub repository](https://github.com/IONOS-WordPress/cm4all-wp-impex)
+
+= What's the current feature set ? =
+
+* ImpEx provides right now generic providers for 
+
+  * import/export WordPress posts/pages **including attachments/uploads** and custom post types
+
+  * import/export configurable database tables (can be used export data from third party plugins/themes)
+
+  * import/export configurable wp_options (can be used export data from third party plugins/themes)
+
+* ImpEx imports and exports data as plain files directly to your local filesystem so that you can operate on the exported data (and attachments) without hassle.
+
+* ImpEx supports snapshots to allow you to rollback to a previous state of your data without downloading the whole data to your local machine
+
+= What's planned for the future ? =
+
+* an intuitive user interface allowing to configure import/export profiles and configuration of the used data providers based on React and JSON Schema
+
+* monthly releases
+
+== Changelog ==
+
+${CHANGELOG}
+
+== Upgrade Notice ==
+
+There is currently no upgrade needed.
