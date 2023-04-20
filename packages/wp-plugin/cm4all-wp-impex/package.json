@@ -1,0 +1,13 @@
+{
+  "name": "@pnpmkambrium-cm4all-wp-impex/cm4all-wp-impex",
+  "version": "1.5.7",
+  "description": "ImpEx contributes extendable Import / Export functionality to WordPress",
+  "keywords": [
+    "import",
+    "export",
+    "migration"
+  ],
+  "engines": {
+    "php": "8.1"
+  }
+}
