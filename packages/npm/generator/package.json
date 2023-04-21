@@ -32,8 +32,8 @@
     "email": "lars.gersmann@cm4all.com"
   },
   "dependencies": {
-    "@wordpress/block-library": "^7.2.0",
-    "@wordpress/blocks": "^11.4.0",
+    "@wordpress/block-library": "^8.8.0",
+    "@wordpress/blocks": "^12.8.0",
     "global-jsdom": "^8.4.0",
     "jsdom": "^19.0.0",
     "lodash.clonedeepwith": "^4.5.0",
@@ -42,7 +42,8 @@
   "devDependencies": {
     "tap-spec": "^5.0.0",
     "tape": "^5.5.2",
-    "zx": "^7.1.0"
+    "zx": "^7.2.1",
+    "@wordpress/hooks": "^3.31.0"
   },
   "publishConfig": {
     "access": "public"
