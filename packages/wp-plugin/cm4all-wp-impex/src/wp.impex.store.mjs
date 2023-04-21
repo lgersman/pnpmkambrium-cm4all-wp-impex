@@ -1,11 +1,11 @@
-import data from "@wordpress/data";
-import apiFetch from "@wordpress/api-fetch";
-import url from "@wordpress/url";
-import Debug from "@cm4all-impex/debug";
-import { __, sprintf } from "@wordpress/i18n";
+import data from '@wordpress/data';
+import apiFetch from '@wordpress/api-fetch';
+import url from '@wordpress/url';
+import Debug from '@cm4all-impex/debug';
+import { __, sprintf } from '@wordpress/i18n';
 
-const debug = Debug.default("wp.impex.store");
-debug("loaded");
+const debug = Debug.default('wp.impex.store');
+debug('loaded');
 
 const KEY = 'cm4all/impex';
 
@@ -20,7 +20,7 @@ export default async function (settings) {
   };
 
   const discovery = await apiFetch({
-    path: "/",
+    path: '/',
   });
 
   if (!discovery.namespaces.includes(namespace)) {
@@ -33,9 +33,9 @@ export default async function (settings) {
 
   const actions = {
     // this is a redux thunk (see https://make.wordpress.org/core/2021/10/29/thunks-in-gutenberg/)
-    createAndUploadConsumeImport : (importProfile, cleanupContent, screenContext) =>
+    createAndUploadConsumeImport: (importProfile, cleanupContent, screenContext) =>
       async function* ({ dispatch, registry, resolveSelect, select }) {
-        debug({importProfile, cleanupContent});
+        debug({ importProfile, cleanupContent });
 
         let importDirHandle = null;
         // showDirectoryPicker will throw a DOMException in case the user pressed cancel
@@ -43,31 +43,33 @@ export default async function (settings) {
           // see https://web.dev/file-system-access/
           importDirHandle = await window.showDirectoryPicker({
             // You can suggest a default start directory by passing a startIn property to the showSaveFilePicker
-            startIn: "downloads",
-            id: "impex-import-dir",
+            startIn: 'downloads',
+            id: 'impex-import-dir',
           });
         } catch {
           return;
         }
 
         yield {
-          type: "progress",
-          title: __("Import", "cm4all-wp-impex"),
-          message: __("Creating snapshot ...", "cm4all-wp-impex"),
+          type: 'progress',
+          title: __('Import', 'cm4all-wp-impex'),
+          message: __('Creating snapshot ...', 'cm4all-wp-impex'),
         };
 
-        const createdImport = (await dispatch.createImport(
-          `transient-import-${window.crypto.randomUUID()}`,
-          `machine generated transient export snapshot created using profile ${importProfile.name}`,
-          importProfile, { }))
-          .payload;
+        const createdImport = (
+          await dispatch.createImport(
+            `transient-import-${window.crypto.randomUUID()}`,
+            `machine generated transient export snapshot created using profile ${importProfile.name}`,
+            importProfile,
+            {},
+          )
+        ).payload;
 
-        
         try {
           yield {
-            type: "progress",
-            title: __("Import", "cm4all-wp-impex"),
-            message: __("Uploading slices ...", "cm4all-wp-impex"),
+            type: 'progress',
+            title: __('Import', 'cm4all-wp-impex'),
+            message: __('Uploading slices ...', 'cm4all-wp-impex'),
           };
 
           const sliceFiles = await screenContext._getSliceFilesToImport(importDirHandle);
@@ -75,34 +77,32 @@ export default async function (settings) {
           const finished = await screenContext._uploadSlices(createdImport, sliceFiles);
 
           yield {
-            type: "progress",
-            title: __("Import", "cm4all-wp-impex"),
-            message: __("Importing slices ...", "cm4all-wp-impex"),
+            type: 'progress',
+            title: __('Import', 'cm4all-wp-impex'),
+            message: __('Importing slices ...', 'cm4all-wp-impex'),
           };
 
-
           await dispatch.consumeImport(
-            createdImport.id, 
+            createdImport.id,
             {
               // @see PHP class ImpexExport::OPTION_CLEANUP_CONTENTS
-              'impex-import-option-cleanup_contents' : cleanupContent,
-            }, 
-            null, 
-            null
+              'impex-import-option-cleanup_contents': cleanupContent,
+            },
+            null,
+            null,
           );
 
           await (yield {
-            type: "info",
-            title: __("Import completed", "cm4all-wp-impex"),
-            message: __("Successfully finished import.", "cm4all-wp-impex"),
+            type: 'info',
+            title: __('Import completed', 'cm4all-wp-impex'),
+            message: __('Successfully finished import.', 'cm4all-wp-impex'),
           });
         } finally {
-          if(createdImport) {
+          if (createdImport) {
             await dispatch.deleteImport(createdImport.id);
           }
         }
-      }
-    ,
+      },
     // this is a redux thunk (see https://make.wordpress.org/core/2021/10/29/thunks-in-gutenberg/)
     createAndDownloadExport: (exportProfile, screenContext) =>
       async function* ({ dispatch, registry, resolveSelect, select }) {
@@ -112,32 +112,26 @@ export default async function (settings) {
           // see https://web.dev/file-system-access/
           // see https://developer.mozilla.org/en-US/docs/Web/API/window/showDirectoryPicker
           exportsDirHandle = await window.showDirectoryPicker({
-            startIn: "downloads",
-            mode: "readwrite",
-            id: "impex-export-dir",
+            startIn: 'downloads',
+            mode: 'readwrite',
+            id: 'impex-export-dir',
           });
         } catch {
           return;
         }
 
         let _exportFolderName = screenContext.normalizeFilename(
-          `${window.location.hostname}-${
-            exportProfile.name
-          }-${screenContext.currentDateString()}`
+          `${window.location.hostname}-${exportProfile.name}-${screenContext.currentDateString()}`,
         );
 
-        _exportFolderName =
-          prompt(
-            "Enter name of the export (max 32 characters):",
-            _exportFolderName
-          ); // ?? _exportFolderName;
+        _exportFolderName = prompt('Enter name of the export (max 32 characters):', _exportFolderName); // ?? _exportFolderName;
 
         // abort if user pressed cancel
-        if(!_exportFolderName) {
+        if (!_exportFolderName) {
           await (yield {
-            type: "info",
-            title: __("Export aborted", "cm4all-wp-impex"),
-            message: __("You canceled the export or entered an invalid export name", "cm4all-wp-impex"),
+            type: 'info',
+            title: __('Export aborted', 'cm4all-wp-impex'),
+            message: __('You canceled the export or entered an invalid export name', 'cm4all-wp-impex'),
           });
 
           return;
@@ -159,47 +153,43 @@ export default async function (settings) {
 
         // ensure directory does not exist
         try {
-          await exportsDirHandle.getDirectoryHandle(
-            _exportFolderName,
-            {
-              create: false,
-            }
-          );
+          await exportsDirHandle.getDirectoryHandle(_exportFolderName, {
+            create: false,
+          });
 
           throw new Error(
-            `Export folder ${_exportFolderName} already exists. Please remove/rename it and continue.\n(${ex.message})`
+            `Export folder ${_exportFolderName} already exists. Please remove/rename it and continue.\n(${ex.message})`,
           );
         } catch {}
 
-        const exportDirHandle = await exportsDirHandle.getDirectoryHandle(
-          _exportFolderName,
-          {
-            create: true,
-          }
-        );
+        const exportDirHandle = await exportsDirHandle.getDirectoryHandle(_exportFolderName, {
+          create: true,
+        });
 
         debug({ exportDirHandle });
-        
+
         let createdExport = null;
 
-        try { 
+        try {
           // const exports = select.getExports();
           // debug({ exports });
 
           yield {
-            type: "progress",
-            title: __("Export", "cm4all-wp-impex"),
-            message: __("Creating snapshot", "cm4all-wp-impex"),
+            type: 'progress',
+            title: __('Export', 'cm4all-wp-impex'),
+            message: __('Creating snapshot', 'cm4all-wp-impex'),
           };
 
-          createdExport = (await dispatch.createExport(
-            exportProfile,
-            `transient-export-${window.crypto.randomUUID()}`,
-            `machine generated transient snapshot created using profile ${exportProfile.name}`
-            // const date = screenContext.currentDateString();
-            // const name = `${site_url.hostname}-${exportProfile.name}-${date}`;
-            // const description = `Export '${exportProfile.name}' created by user '${currentUser.name}' at ${date}`;
-          )).payload;
+          createdExport = (
+            await dispatch.createExport(
+              exportProfile,
+              `transient-export-${window.crypto.randomUUID()}`,
+              `machine generated transient snapshot created using profile ${exportProfile.name}`,
+              // const date = screenContext.currentDateString();
+              // const name = `${site_url.hostname}-${exportProfile.name}-${date}`;
+              // const description = `Export '${exportProfile.name}' created by user '${currentUser.name}' at ${date}`;
+            )
+          ).payload;
 
           // const exports2 = select.getExports();
           // console.log(exports2);
@@ -207,9 +197,9 @@ export default async function (settings) {
           const path = `${settings.base_uri}/export/${createdExport.id}/slice`;
 
           yield {
-            type: "progress",
-            title: __("Downloading snapshot", "cm4all-wp-impex"),
-            message: __("Creating snapshot", "cm4all-wp-impex"),
+            type: 'progress',
+            title: __('Downloading snapshot', 'cm4all-wp-impex'),
+            message: __('Creating snapshot', 'cm4all-wp-impex'),
           };
 
           const initialResponse = await apiFetch({
@@ -222,13 +212,9 @@ export default async function (settings) {
           //   initialResponse.headers.get("X-WP-Total"),
           //   10
           // );
-          const x_wp_total_pages = Number.parseInt(
-            initialResponse.headers.get("X-WP-TotalPages")
-          );
+          const x_wp_total_pages = Number.parseInt(initialResponse.headers.get('X-WP-TotalPages'));
 
-          const sliceChunks = [
-            screenContext.saveSlicesChunk(exportDirHandle, initialResponse.json(), 1),
-          ];
+          const sliceChunks = [screenContext.saveSlicesChunk(exportDirHandle, initialResponse.json(), 1)];
           for (let chunk = 2; chunk <= x_wp_total_pages; chunk++) {
             sliceChunks.push(
               screenContext.saveSlicesChunk(
@@ -236,17 +222,17 @@ export default async function (settings) {
                 apiFetch({
                   path: url.addQueryArgs(path, { page: chunk }),
                 }),
-                chunk
-              )
+                chunk,
+              ),
             );
           }
 
           await Promise.all(sliceChunks);
 
           await (yield {
-            type: "info",
-            title: __("Export completed", "cm4all-wp-impex"),
-            message: __("Successfully finished export.", "cm4all-wp-impex"),
+            type: 'info',
+            title: __('Export completed', 'cm4all-wp-impex'),
+            message: __('Successfully finished export.', 'cm4all-wp-impex'),
           });
 
           // await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -264,7 +250,6 @@ export default async function (settings) {
           //   message: __("Export failed by abortion", "cm4all-wp-impex"),
           // };
 
-
           // throw new Error("Huuuuu - something went wrong");
 
           // yield {
@@ -275,64 +260,64 @@ export default async function (settings) {
 
           // await new Promise((resolve) => setTimeout(resolve, 1000));
         } finally {
-          if(createdExport) {
+          if (createdExport) {
             await dispatch.deleteExport(createdExport.id);
           } else {
-            await exportsDirHandle.removeEntry(exportDirHandle.name, { recursive : true, });
+            await exportsDirHandle.removeEntry(exportDirHandle.name, { recursive: true });
           }
         }
       },
 
-    async createExport(exportProfile, name = "", description = "") {
+    async createExport(exportProfile, name = '', description = '') {
       const payload = await apiFetch({
         path: `${settings.base_uri}/export`,
-        method: "POST",
+        method: 'POST',
         data: { profile: exportProfile.name, name, description },
       });
 
       return {
-        type: "ADD_EXPORT",
+        type: 'ADD_EXPORT',
         payload,
       };
     },
     setExports(exports) {
       return {
-        type: "SET_EXPORTS",
+        type: 'SET_EXPORTS',
         payload: exports,
       };
     },
     async updateExport(id, data) {
       const updatedExport = await apiFetch({
         path: `${DEFAULT_STATE.settings.base_uri}/export/${id}`,
-        method: "PATCH",
+        method: 'PATCH',
         data,
       });
 
       return {
-        type: "UPDATE_EXPORT",
+        type: 'UPDATE_EXPORT',
         payload: updatedExport,
       };
     },
     async deleteExport(id) {
       const deletedExport = await apiFetch({
         path: `${settings.base_uri}/export/${id}`,
-        method: "DELETE",
+        method: 'DELETE',
       });
 
       return {
-        type: "DELETE_EXPORT",
+        type: 'DELETE_EXPORT',
         payload: id,
       };
     },
     async createImport(name, description, importProfile, options) {
       const payload = await apiFetch({
         path: `${settings.base_uri}/import`,
-        method: "POST",
+        method: 'POST',
         data: { name, description, profile: importProfile.name, options },
       });
 
       return {
-        type: "ADD_IMPORT",
+        type: 'ADD_IMPORT',
         payload,
       };
     },
@@ -340,76 +325,79 @@ export default async function (settings) {
       const queryArgs = {};
 
       if (offset !== null) {
-        queryArgs["offset"] = offset;
+        queryArgs['offset'] = offset;
       }
 
       if (limit !== null) {
-        queryArgs["limit"] = limit;
+        queryArgs['limit'] = limit;
       }
 
-      const { log, callbacks = [], notConsumedSlices } = await apiFetch({
-        path: url.addQueryArgs(
-          `${settings.base_uri}/import/${id}/consume`,
-          queryArgs
-        ),
-        method: "POST",
+      const {
+        log,
+        callbacks = [],
+        notConsumedSlices,
+      } = await apiFetch({
+        path: url.addQueryArgs(`${settings.base_uri}/import/${id}/consume`, queryArgs),
+        method: 'POST',
         data: { options },
       });
 
-      // process returned callbacks 
-      const postConsumeCallbacks = callbacks.map(
-        callback => apiFetch({
-          path : `${settings.base_uri}/${callback.path}`,
+      // process returned callbacks
+      const postConsumeCallbacks = callbacks.map((callback) =>
+        apiFetch({
+          path: `${settings.base_uri}/${callback.path}`,
           method: callback.method,
           data: callback.data,
-        }).catch(error => {
-          // silently ignore errors from timed out metadata updates 
-          if(error.code==='fetch_error') {
+        }).catch((error) => {
+          // silently ignore errors from timed out metadata updates
+          if (error.code === 'fetch_error') {
             log.push({
               type: 'warning',
-              message : `Ignore post consume callback(='${callback.path}') response : server side timed out(data=${JSON.stringify(callback.data)})`,
-              cause : [],
+              message: `Ignore post consume callback(='${
+                callback.path
+              }') response : server side timed out(data=${JSON.stringify(callback.data)})`,
+              cause: [],
             });
             return Promise.resolve();
           }
-        })
+        }),
       );
 
       await Promise.all(postConsumeCallbacks);
 
-      debug("consumeImport(%o, %o, %s, %o).log=\n%o", id, JSON.stringify(options), offset, limit, log);
+      debug('consumeImport(%o, %o, %s, %o).log=\n%o', id, JSON.stringify(options), offset, limit, log);
 
       return {
-        type: "",
+        type: '',
         payload: { log, notConsumedSlices },
       };
     },
     setImports(exports) {
       return {
-        type: "SET_IMPORTS",
+        type: 'SET_IMPORTS',
         payload: exports,
       };
     },
     async updateImport(id, data) {
       const updatedImport = await apiFetch({
         path: `${DEFAULT_STATE.settings.base_uri}/import/${id}`,
-        method: "PATCH",
+        method: 'PATCH',
         data,
       });
 
       return {
-        type: "UPDATE_IMPORT",
+        type: 'UPDATE_IMPORT',
         payload: updatedImport,
       };
     },
     async deleteImport(id) {
       const deletedImport = await apiFetch({
         path: `${settings.base_uri}/import/${id}`,
-        method: "DELETE",
+        method: 'DELETE',
       });
 
       return {
-        type: "DELETE_IMPORT",
+        type: 'DELETE_IMPORT',
         payload: id,
       };
     },
@@ -457,18 +445,16 @@ export default async function (settings) {
     __experimentalUseThunks: true,
     reducer(state = DEFAULT_STATE, { type, payload }) {
       switch (type) {
-        case "ADD_EXPORT": {
+        case 'ADD_EXPORT': {
           return {
             ...state,
             exports: [payload, ...state.exports],
           };
         }
-        case "UPDATE_EXPORT": {
-          const indexOfExport = state.exports.findIndex(
-            (_) => _.id === payload.id
-          );
+        case 'UPDATE_EXPORT': {
+          const indexOfExport = state.exports.findIndex((_) => _.id === payload.id);
           if (indexOfExport === -1) {
-            debug("Export(id=%s) is unknown", payload.id);
+            debug('Export(id=%s) is unknown', payload.id);
           }
 
           state.exports.splice(indexOfExport, 1, payload);
@@ -478,12 +464,10 @@ export default async function (settings) {
             exports: [...state.exports],
           };
         }
-        case "DELETE_EXPORT": {
-          const indexOfExport = state.exports.findIndex(
-            (_) => _.id === payload
-          );
+        case 'DELETE_EXPORT': {
+          const indexOfExport = state.exports.findIndex((_) => _.id === payload);
           if (indexOfExport === -1) {
-            debug("Export(id=%s) is unknown", payload);
+            debug('Export(id=%s) is unknown', payload);
           }
 
           state.exports.splice(indexOfExport, 1);
@@ -493,33 +477,29 @@ export default async function (settings) {
             exports: [...state.exports],
           };
         }
-        case "SET_EXPORTS": {
+        case 'SET_EXPORTS': {
           return {
             ...state,
             exports: [...payload],
           };
         }
-        case "SET_EXPORTPROFILES": {
+        case 'SET_EXPORTPROFILES': {
           return {
             ...state,
-            exportProfiles: [...payload].sort((l, r) =>
-              l.name.localeCompare(r.name)
-            ),
+            exportProfiles: [...payload].sort((l, r) => l.name.localeCompare(r.name)),
           };
         }
 
-        case "ADD_IMPORT": {
+        case 'ADD_IMPORT': {
           return {
             ...state,
             imports: [payload, ...state.imports],
           };
         }
-        case "UPDATE_IMPORT": {
-          const indexOfExport = state.imports.findIndex(
-            (_) => _.id === payload.id
-          );
+        case 'UPDATE_IMPORT': {
+          const indexOfExport = state.imports.findIndex((_) => _.id === payload.id);
           if (indexOfExport === -1) {
-            debug("Export(id=%s) is unknown", payload.id);
+            debug('Export(id=%s) is unknown', payload.id);
           }
 
           state.imports.splice(indexOfExport, 1, payload);
@@ -529,12 +509,10 @@ export default async function (settings) {
             imports: [...state.imports],
           };
         }
-        case "DELETE_IMPORT": {
-          const indexOfExport = state.imports.findIndex(
-            (_) => _.id === payload
-          );
+        case 'DELETE_IMPORT': {
+          const indexOfExport = state.imports.findIndex((_) => _.id === payload);
           if (indexOfExport === -1) {
-            debug("Export(id=%s) is unknown", payload);
+            debug('Export(id=%s) is unknown', payload);
           }
 
           state.imports.splice(indexOfExport, 1);
@@ -544,18 +522,16 @@ export default async function (settings) {
             imports: [...state.imports],
           };
         }
-        case "SET_IMPORTS": {
+        case 'SET_IMPORTS': {
           return {
             ...state,
             imports: [...payload],
           };
         }
-        case "SET_IMPORTPROFILES": {
+        case 'SET_IMPORTPROFILES': {
           return {
             ...state,
-            importProfiles: [...payload].sort((l, r) =>
-              l.name.localeCompare(r.name)
-            ),
+            importProfiles: [...payload].sort((l, r) => l.name.localeCompare(r.name)),
           };
         }
       }
@@ -570,7 +546,7 @@ export default async function (settings) {
           path: `${base_uri}/export/profile`,
         });
         return {
-          type: "SET_EXPORTPROFILES",
+          type: 'SET_EXPORTPROFILES',
           payload,
         };
       },
@@ -579,7 +555,7 @@ export default async function (settings) {
           path: `${base_uri}/export`,
         });
         return {
-          type: "SET_EXPORTS",
+          type: 'SET_EXPORTS',
           payload,
         };
       },
@@ -588,7 +564,7 @@ export default async function (settings) {
           path: `${base_uri}/import/profile`,
         });
         return {
-          type: "SET_IMPORTPROFILES",
+          type: 'SET_IMPORTPROFILES',
           payload,
         };
       },
@@ -597,7 +573,7 @@ export default async function (settings) {
           path: `${base_uri}/import`,
         });
         return {
-          type: "SET_IMPORTS",
+          type: 'SET_IMPORTS',
           payload,
         };
       },

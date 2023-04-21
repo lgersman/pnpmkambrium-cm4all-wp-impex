@@ -1,36 +1,28 @@
-import hooks from "@wordpress/hooks";
-import Debug from "@cm4all-impex/debug";
-import ImpexFilters from "@cm4all-impex/filters";
+import hooks from '@wordpress/hooks';
+import Debug from '@cm4all-impex/debug';
+import ImpexFilters from '@cm4all-impex/filters';
 
-const debug = Debug.default("wp.impex.attachments");
-debug("huhu!");
+const debug = Debug.default('wp.impex.attachments');
+debug('huhu!');
 
 hooks.addFilter(
   ImpexFilters.SLICE_REST_UNMARSHAL,
   ImpexFilters.NAMESPACE,
   async function (namespace, slice, sliceIndex, chunkDirHandle) {
-    if (
-      slice["tag"] === "attachment" &&
-      slice["meta"]["entity"] === "attachment" &&
-      slice["type"] === "resource"
-    ) {
-      const _links_self = slice["_links"]?.["self"];
+    if (slice['tag'] === 'attachment' && slice['meta']['entity'] === 'attachment' && slice['type'] === 'resource') {
+      const _links_self = slice['_links']?.['self'];
 
       if (_links_self) {
         // download attachments to local folder
         for (const entry of _links_self) {
-          const href = entry["href"];
+          const href = entry['href'];
 
-          const filename =
-            `slice-${sliceIndex.toString().padStart(4, "0")}-attachment.blob`;
+          const filename = `slice-${sliceIndex.toString().padStart(4, '0')}-attachment.blob`;
 
           await fetch(href).then(async (response) => {
-            attachmentFileHandle = await chunkDirHandle.getFileHandle(
-              filename,
-              {
-                create: true,
-              },
-            );
+            attachmentFileHandle = await chunkDirHandle.getFileHandle(filename, {
+              create: true,
+            });
             const writable = await attachmentFileHandle.createWritable();
 
             await response.body.pipeTo(writable);
@@ -42,7 +34,7 @@ hooks.addFilter(
         }
       }
 
-      delete slice["_links"];
+      delete slice['_links'];
       /*
       slice['_links']['self'][] = [
         'href' => slice[Impex::SLICE_META]['data']['guid'],
