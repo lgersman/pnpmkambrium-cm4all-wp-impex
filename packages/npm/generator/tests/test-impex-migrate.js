@@ -2,6 +2,7 @@ import test from './tape-configuration.js';
 import migrate from '../src/impex-migrate.js';
 import { rm, mkdir } from 'node:fs/promises';
 import { basename } from 'node:path';
+// eslint-disable-next-line import/no-unresolved
 import 'zx/globals';
 
 const __TMP_DIR = './tests/tmp';
