@@ -1,8 +1,8 @@
-import components from "@wordpress/components";
-import data from "@wordpress/data";
-import element from "@wordpress/element";
-import { __, sprintf } from "@wordpress/i18n";
-import Store from "@cm4all-impex/store";
+import components from '@wordpress/components';
+import data from '@wordpress/data';
+import element from '@wordpress/element';
+import { __, sprintf } from '@wordpress/i18n';
+import Store from '@cm4all-impex/store';
 
 export default function ExportProfileSelector({ value, onChange }) {
   const { exportProfiles } = data.useSelect((select) => {
@@ -15,17 +15,15 @@ export default function ExportProfileSelector({ value, onChange }) {
   const exportProfileSelectRef = element.useRef();
 
   const setExportProfile = (exportProfileName = null) => {
-    const exportProfile = exportProfiles.find(
-      (_) => _.name === exportProfileName
-    );
+    const exportProfile = exportProfiles.find((_) => _.name === exportProfileName);
     onChange(exportProfile);
 
-    if(exportProfileSelectRef.current) {
+    if (exportProfileSelectRef.current) {
       if (!exportProfile) {
         exportProfileSelectRef.current.selectedIndex = 0;
       }
 
-      exportProfileSelectRef.current.title = exportProfile?.description || "";
+      exportProfileSelectRef.current.title = exportProfile?.description || '';
     }
   };
 
@@ -34,20 +32,18 @@ export default function ExportProfileSelector({ value, onChange }) {
   }, [exportProfiles]);
 
   element.useEffect(() => {
-    for(const option of exportProfileSelectRef.current?.options ?? []) {
-      if(!option.disabled) {
-        option.title = exportProfiles.find(_ => _.name === option.value)?.description;
+    for (const option of exportProfileSelectRef.current?.options ?? []) {
+      if (!option.disabled) {
+        option.title = exportProfiles.find((_) => _.name === option.value)?.description;
       }
     }
   }, [exportProfiles]);
 
   const options = [...exportProfiles];
-  
-  if(exportProfiles.length > 1) {
+
+  if (exportProfiles.length > 1) {
     options.unshift({
-      name: exportProfiles.length
-      ? __("Select an export profile", "cm4all-wp-impex")
-      : __("No export profiles found"),
+      name: exportProfiles.length ? __('Select an export profile', 'cm4all-wp-impex') : __('No export profiles found'),
       disabled: true,
     });
   }
@@ -58,20 +54,14 @@ export default function ExportProfileSelector({ value, onChange }) {
       disabled={!exportProfiles.length}
       value={value?.name}
       onChange={setExportProfile}
-      options={
-        options
-        .map((_) => ({
-          value: _.disabled ? undefined : _.name,
-          label: _.name,
-          title: _.description,
-          disabled: _.disabled,
-        }))
-      }
-      label={__("Export Profile:", "cm4all-wp-impex")}
-      help={__(
-        "Export profiles define which WordPress data should be extracted",
-        "cm4all-wp-impex"
-      )}
+      options={options.map((_) => ({
+        value: _.disabled ? undefined : _.name,
+        label: _.name,
+        title: _.description,
+        disabled: _.disabled,
+      }))}
+      label={__('Export Profile:', 'cm4all-wp-impex')}
+      help={__('Export profiles define which WordPress data should be extracted', 'cm4all-wp-impex')}
     ></components.SelectControl>
   );
 }

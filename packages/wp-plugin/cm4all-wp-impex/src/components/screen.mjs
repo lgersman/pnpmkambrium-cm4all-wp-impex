@@ -1,26 +1,24 @@
-import element from "@wordpress/element";
-import components from "@wordpress/components";
-import data from "@wordpress/data";
-import { __, sprintf } from "@wordpress/i18n";
-import Debug from "@cm4all-impex/debug";
+import element from '@wordpress/element';
+import components from '@wordpress/components';
+import data from '@wordpress/data';
+import { __, sprintf } from '@wordpress/i18n';
+import Debug from '@cm4all-impex/debug';
 
-import Store from "@cm4all-impex/store";
+import Store from '@cm4all-impex/store';
 
-import Export from "./export.mjs";
-import Import from "./import.mjs";
+import Export from './export.mjs';
+import Import from './import.mjs';
 
-import ExportProfileSelector from "./export-profile-selector.mjs";
-import ImportProfileSelector from "./import-profile-selector.mjs";
-import useScreenContext from "./screen-context.mjs";
+import ExportProfileSelector from './export-profile-selector.mjs';
+import ImportProfileSelector from './import-profile-selector.mjs';
+import useScreenContext from './screen-context.mjs';
 
-const debug = Debug.default("wp.impex.dashboard.screen");
-debug("loaded");
+const debug = Debug.default('wp.impex.dashboard.screen');
+debug('loaded');
 
-const isFileystemApiAvailable =
-  typeof window.showDirectoryPicker === "function";
+const isFileystemApiAvailable = typeof window.showDirectoryPicker === 'function';
 
-const isCryptoRandomAvailable =
-  typeof window?.crypto?.randomUUID === "function";
+const isCryptoRandomAvailable = typeof window?.crypto?.randomUUID === 'function';
 
 function AdvancedTab() {
   return (
@@ -40,34 +38,28 @@ async function ImportExportGeneratorConsumer(gen, setProgress, defaultErrorPopup
   try {
     for await (const state of gen) {
       switch (state.type) {
-        case "progress":
+        case 'progress':
           setProgress({
             component: (
-              <components.Modal
-                title={state.title}
-                onRequestClose={() => {}}
-                overlayClassName="blocking"
-              >
+              <components.Modal title={state.title} onRequestClose={() => {}} overlayClassName="blocking">
                 {state.message}
                 <progress indeterminate="true"></progress>
               </components.Modal>
             ),
           });
           break;
-        case "info": 
-          gen.next(new Promise((resolve) => {
-            setProgress({
-              component: (
-                <components.Modal
-                  title={state.title}
-                  onRequestClose={() => resolve()}
-                  overlayClassName="blocking"
-                >
-                  {state.message}
-                </components.Modal>
-              ),
-            });
-          }));
+        case 'info':
+          gen.next(
+            new Promise((resolve) => {
+              setProgress({
+                component: (
+                  <components.Modal title={state.title} onRequestClose={() => resolve()} overlayClassName="blocking">
+                    {state.message}
+                  </components.Modal>
+                ),
+              });
+            }),
+          );
           break;
       }
     }
@@ -81,12 +73,12 @@ async function ImportExportGeneratorConsumer(gen, setProgress, defaultErrorPopup
           onRequestClose={() => setProgress(null)}
           overlayClassName="blocking fault"
         >
-          {ex.message.split("\n").map((line, index) => (
+          {ex.message.split('\n').map((line, index) => (
             <p key={index}>{line}</p>
           ))}
           <components.Flex direction="row" justify="flex-end">
             <components.Button isPrimary onClick={() => setProgress(null)}>
-              {__("OK", "cm4all-wp-impex")}
+              {__('OK', 'cm4all-wp-impex')}
             </components.Button>
           </components.Flex>
         </components.Modal>
@@ -129,14 +121,14 @@ function SimpleTab() {
     console.log({ importProfile, screenContext });
     const gen = await createAndUploadConsumeImport(importProfile, cleanupContent, screenContext);
 
-    await ImportExportGeneratorConsumer(gen, setProgress, __("Import failed", "cm4all-wp-impex"));
+    await ImportExportGeneratorConsumer(gen, setProgress, __('Import failed', 'cm4all-wp-impex'));
   };
 
   const _createAndDownloadExport = async () => {
     console.log({ exportProfile, screenContext });
     const gen = await createAndDownloadExport(exportProfile, screenContext);
 
-    await ImportExportGeneratorConsumer(gen, setProgress, __("Export failed", "cm4all-wp-impex"));
+    await ImportExportGeneratorConsumer(gen, setProgress, __('Export failed', 'cm4all-wp-impex'));
   };
 
   debug({ exportProfile, importProfile, _createAndDownloadExport });
@@ -147,15 +139,8 @@ function SimpleTab() {
         <components.FlexItem isBlock>
           <components.Panel className="export">
             <components.PanelBody opened className="create-export-form">
-              <ExportProfileSelector
-                value={exportProfile}
-                onChange={setExportProfile}
-              />
-              <components.Button
-                variant="primary"
-                disabled={!exportProfile}
-                onClick={_createAndDownloadExport}
-              >
+              <ExportProfileSelector value={exportProfile} onChange={setExportProfile} />
+              <components.Button variant="primary" disabled={!exportProfile} onClick={_createAndDownloadExport}>
                 Export
               </components.Button>
             </components.PanelBody>
@@ -165,19 +150,25 @@ function SimpleTab() {
         <components.FlexItem isBlock>
           <components.Panel className="import">
             <components.PanelBody opened className="upload-import-form">
-              <ImportProfileSelector
-                value={importProfile}
-                onChange={setImportProfile}
-              />
+              <ImportProfileSelector value={importProfile} onChange={setImportProfile} />
               <components.ToggleControl
-                help={ cleanupContent ? __("Clean up existing post, page, media, block pattern, nav_menu an reusable block items", "cm4all-wp-impex") : __("Keep existing post, page, media, block pattern, nav_menu an reusable block items. Media might be partly overwritten by export", "cm4all-wp-impex") }
-                checked={ cleanupContent }
-                onChange={ setCleanupContent }
-                label={__("Remove existing content before import", "cm4all-wp-impex")}
-              >
-              </components.ToggleControl>
+                help={
+                  cleanupContent
+                    ? __(
+                        'Clean up existing post, page, media, block pattern, nav_menu an reusable block items',
+                        'cm4all-wp-impex',
+                      )
+                    : __(
+                        'Keep existing post, page, media, block pattern, nav_menu an reusable block items. Media might be partly overwritten by export',
+                        'cm4all-wp-impex',
+                      )
+                }
+                checked={cleanupContent}
+                onChange={setCleanupContent}
+                label={__('Remove existing content before import', 'cm4all-wp-impex')}
+              ></components.ToggleControl>
               <components.Button
-                isDestructive 
+                isDestructive
                 isPrimary
                 disabled={!importProfile}
                 onClick={_createAndUploadConsumeImport}
@@ -200,22 +191,22 @@ function SimpleTab() {
 export default function () {
   return (
     <div>
-      <h1>{__("ImpEx", "cm4all-wp-impex")}</h1>
+      <h1>{__('ImpEx', 'cm4all-wp-impex')}</h1>
 
       <components.SlotFillProvider>
         <components.TabPanel
           tabs={[
             {
-              name: "basic",
-              title: __("Basic", "cm4all-wp-impex"),
+              name: 'basic',
+              title: __('Basic', 'cm4all-wp-impex'),
             },
             {
-              name: "advanced",
-              title: __("Advanced", "cm4all-wp-impex"),
+              name: 'advanced',
+              title: __('Advanced', 'cm4all-wp-impex'),
             },
           ]}
         >
-          {(tab) => (tab.name === "advanced" ? <AdvancedTab /> : <SimpleTab />)}
+          {(tab) => (tab.name === 'advanced' ? <AdvancedTab /> : <SimpleTab />)}
         </components.TabPanel>
 
         <components.Slot name="progress" />
@@ -226,41 +217,24 @@ export default function () {
             isDismissible={false}
           >
             <p>
-              ImpEx Import / Export requires a browser implementing the{" "}
-              <a href="https://web.dev/file-system-access/">
-                File System Access API
-              </a>
-              .
+              ImpEx Import / Export requires a browser implementing the{' '}
+              <a href="https://web.dev/file-system-access/">File System Access API</a>.
             </p>
             <p>
-              Currently only Chromium based browsers like Chrome, Chromium, MS
-              Edge are known to support this feature.
+              Currently only Chromium based browsers like Chrome, Chromium, MS Edge are known to support this feature.
             </p>
             <p>
-              See{" "}
-              <a href="https://caniuse.com/mdn-api_window_showdirectorypicker">
-                here
-              </a>{" "}
-              to find the latest list of browsers supporting the{' '}
-              <a href="https://web.dev/file-system-access/">
-                File System Access API
-              </a>{" "}
-              feature.
+              See <a href="https://caniuse.com/mdn-api_window_showdirectorypicker">here</a> to find the latest list of
+              browsers supporting the <a href="https://web.dev/file-system-access/">File System Access API</a> feature.
             </p>
           </components.Modal>
         )}
 
         {!isCryptoRandomAvailable && (
-          <components.Modal
-            title="Ouch - your browser does not support the Crypto API :-("
-            isDismissible={false}
-          >
+          <components.Modal title="Ouch - your browser does not support the Crypto API :-(" isDismissible={false}>
             <p>
               ImpEx Import / Export requires a browser implementing the{' '}
-              <a href="https://developer.mozilla.org/en-US/docs/Web/API/Crypto">
-                Browser Crypto API
-              </a>
-              .
+              <a href="https://developer.mozilla.org/en-US/docs/Web/API/Crypto">Browser Crypto API</a>.
             </p>
           </components.Modal>
         )}
