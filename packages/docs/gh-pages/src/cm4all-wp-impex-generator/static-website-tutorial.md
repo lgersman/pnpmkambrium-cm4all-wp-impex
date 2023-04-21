@@ -6,12 +6,12 @@ The sources can be found at the [ImpEx WordPress plugin GitHub repository](https
 
 <!-- toc -->
 
-{{#include ./../../../../packages/@cm4all-wp-impex/generator/examples/impex-complete-static-homepage-conversion/README.md}}
+{{#include ./../../../../npm/generator/examples/impex-complete-static-homepage-conversion/README.md}}
 
 # Full conversion script
 
 ```js
-{{#include ./../../../../packages/@cm4all-wp-impex/generator/examples/impex-complete-static-homepage-conversion/index.js}}
+{{#include ./../../../../npm/generator/examples/impex-complete-static-homepage-conversion/index.js}}
 ```
 
 The script is also available at [ImpEx WordPress plugin GitHub repository](https://github.com/IONOS-WordPress/cm4all-wp-impex/blob/develop/packages/%40cm4all-wp-impex/generator/examples/impex-complete-static-homepage-conversion/index.js)

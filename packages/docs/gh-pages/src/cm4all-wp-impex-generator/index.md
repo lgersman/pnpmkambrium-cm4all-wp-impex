@@ -4,4 +4,4 @@
 
 <!-- toc -->
 
-{{#include ./../../../../packages/@cm4all-wp-impex/generator/README.md}}
+{{#include ./../../../../npm/generator/README.md}}
