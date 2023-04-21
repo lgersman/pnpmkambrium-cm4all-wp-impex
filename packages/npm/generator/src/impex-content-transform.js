@@ -1,9 +1,11 @@
+/* eslint-disable no-console */
 /*
   provides functions related to transforming html to WordPress Gutenberg [block-annotated HTML](https://wordpress.com/support/wordpress-editor/blocks/)
 */
 
 import { readFile } from 'fs/promises';
 import cloneDeepWith from 'lodash.clonedeepwith';
+// eslint-disable-next-line import/no-unresolved
 import 'global-jsdom/register';
 
 import 'polyfill-library/polyfills/__dist/matchMedia/raw.js';
