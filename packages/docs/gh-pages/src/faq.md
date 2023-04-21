@@ -10,7 +10,7 @@ Right now Chromium based browsers (except of Brave who disabled this feature) an
 
 As an alternative you can use the [ImpEx CLI](./impex-cli.html) to trigger import/export operations on the commandline.
 
-## `Ouch -your browser does not support the Crypto API`
+## `Ouch - your browser does not support the Crypto API`
 
 Same same as with the [File System Access API](https://web.dev/file-system-access/) API ... depending on your browser version the Crypto API feature we use (`window.crypto.randomUUID`) may not be supported by your browser.
 
