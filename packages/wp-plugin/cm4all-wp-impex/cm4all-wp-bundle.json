@@ -1,0 +1,10 @@
+{
+  "wordpress": {
+    "mappings": {
+      "@cm4all-impex/debug": "wp.impex.debug",
+      "@cm4all-impex/store": "wp.impex.store",
+      "@cm4all-impex/filters": "wp.impex.filters",
+      "React": "window.React"
+    }
+  }
+}

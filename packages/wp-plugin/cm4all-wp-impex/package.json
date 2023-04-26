@@ -9,5 +9,8 @@
   ],
   "engines": {
     "php": "8.1"
+  },
+  "devDependencies": {
+    "debug": "4.3.4"
   }
 }
