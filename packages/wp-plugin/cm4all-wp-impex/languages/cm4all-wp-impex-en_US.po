@@ -32,3 +32,362 @@ msgstr ""
 #. Author URI of the plugin
 msgid "https://cm4all.com"
 msgstr ""
+
+#: inc/class-impex-export-rest-controller.php:142
+#: inc/class-impex-export-rest-controller.php:161
+msgid "could not find export by id"
+msgstr ""
+
+#: inc/class-impex-export-rest-controller.php:175
+#: inc/class-impex-import-rest-controller.php:262
+msgid "body expected to be a json object"
+msgstr ""
+
+#: inc/class-impex-export-rest-controller.php:180
+msgid "export profile not found"
+msgstr ""
+
+#: inc/class-impex-export-rest-controller.php:208
+#: inc/class-impex-import-rest-controller.php:295
+msgid "Failed to update export"
+msgstr ""
+
+#: inc/class-impex-export-rest-controller.php:227
+#: inc/class-impex-import-rest-controller.php:314
+msgid "removing impex export failed"
+msgstr ""
+
+#: inc/class-impex-export-rest-controller.php:351
+msgid "Unique identifier for the export."
+msgstr ""
+
+#: inc/class-impex-export-rest-controller.php:358
+msgid "The options used to create the export."
+msgstr ""
+
+#: inc/class-impex-export-rest-controller.php:366
+msgid "The name of the export profile to use."
+msgstr ""
+
+#: inc/class-impex-export-rest-controller.php:375
+msgid "The date of the export."
+msgstr ""
+
+#: inc/class-impex-export-rest-controller.php:382
+msgid "The user login of the user creating the export."
+msgstr ""
+
+#: inc/class-impex-export-rest-controller.php:388
+msgid "The human readable name of the export"
+msgstr ""
+
+#: inc/class-impex-export-rest-controller.php:395
+msgid "The human readable description of the export"
+msgstr ""
+
+#: inc/class-impex-import-rest-controller.php:163
+msgid "Multipart parameter slice is missing"
+msgstr ""
+
+#: inc/class-impex-import-rest-controller.php:180
+msgid "Multipart parameter \"slice\" is expected to contain json"
+msgstr ""
+
+#: inc/class-impex-import-rest-controller.php:196
+#: inc/class-impex-import-rest-controller.php:223
+#: inc/class-impex-import-rest-controller.php:248
+msgid "could not find import by id"
+msgstr ""
+
+#: inc/class-impex-import-rest-controller.php:438
+msgid "Unique identifier for the import."
+msgstr ""
+
+#: inc/class-impex-import-rest-controller.php:445
+msgid "The options used to create the import."
+msgstr ""
+
+#: inc/class-impex-import-rest-controller.php:453
+msgid "The name of the import profile to use."
+msgstr ""
+
+#: inc/class-impex-import-rest-controller.php:462
+msgid "The date of the import."
+msgstr ""
+
+#: inc/class-impex-import-rest-controller.php:469
+msgid "The user login of the user creating the import."
+msgstr ""
+
+#: inc/class-impex-import-rest-controller.php:475
+msgid "The name of the import"
+msgstr ""
+
+#: inc/class-impex-import-rest-controller.php:482
+msgid "The description of the import"
+msgstr ""
+
+#: inc/class-impex-profile-rest-controller.php:171
+msgid "Unique identifier for the profile."
+msgstr ""
+
+#: inc/class-impex-profile-rest-controller.php:177
+msgid "Human readable description of the profile."
+msgstr ""
+
+#: inc/impex-import-extension-attachment.php:290
+msgid "Multipart file upload is missing in request"
+msgstr ""
+
+#: inc/wp-dashboard-contributions.php:39
+msgid "Overview"
+msgstr ""
+
+#: inc/wp-dashboard-contributions.php:57
+#: build/wp.impex.dashboard.js:514
+#: build/wp.impex.store.js:201
+msgid "Export"
+msgstr ""
+
+#: inc/wp-dashboard-contributions.php:59
+msgid "Export will create a snapshot of the data provided by the ImpEx export profile.<p/><p>The snapshot can be downloaded to a directory on your local machine."
+msgstr ""
+
+#: inc/wp-dashboard-contributions.php:67
+#: build/wp.impex.dashboard.js:710
+#: build/wp.impex.store.js:117
+#: build/wp.impex.store.js:129
+#: build/wp.impex.store.js:136
+msgid "Import"
+msgstr ""
+
+#: inc/wp-dashboard-contributions.php:68
+msgid "Import allows you to upload a (previously created) ImpEx snapshot and import it to your WordPress instance."
+msgstr ""
+
+#: inc/wp-dashboard-contributions.php:75
+msgid "For more information:"
+msgstr ""
+
+#: inc/wp-dashboard-contributions.php:76
+msgid "<a href=\"https://ionos-wordpress.github.io/cm4all-wp-impex/\">Documentation on Impex</a>"
+msgstr ""
+
+#: inc/wp-dashboard-contributions.php:77
+msgid "<a href=\"https://github.com/IONOS-WordPress/cm4all-wp-impex/issues\">Support</a>"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:229
+msgid "Select an export profile"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:229
+msgid "No export profiles found"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:246
+msgid "Export Profile:"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:247
+msgid "Export profiles define which WordPress data should be extracted"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:267
+msgid "Name"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:268
+msgid "Name should be short and human readable"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:275
+msgid "Description"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:276
+msgid "Description may contain more expressive information describing the item"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:449
+#: build/wp.impex.store.js:202
+#: build/wp.impex.store.js:216
+msgid "Creating snapshot"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:484
+#: build/wp.impex.store.js:215
+msgid "Downloading snapshot"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:514
+msgid "Create snapshot"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:514
+msgid "Create Snapshot"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:514
+msgid "Download snapshot"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:517
+msgid "Additional actions on this export"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:520
+#: build/wp.impex.dashboard.js:740
+msgid "Edit"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:525
+msgid "Edit export"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:534
+#: build/wp.impex.dashboard.js:754
+msgid "Delete"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:539
+msgid "Delete export"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:540
+msgid "Are you really sure to delete export"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:601
+msgid "Select an import profile"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:601
+msgid "No import profiles found"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:610
+msgid "Import Profile:"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:618
+msgid "Import profiles define which WordPress data should be consumed"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:659
+msgid "Importing data into WordPress ..."
+msgstr ""
+
+#: build/wp.impex.dashboard.js:697
+msgid "Uploading snapshot"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:713
+msgid "Upload snapshot to WordPress"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:718
+msgid "Upload snapshot"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:719
+msgid "Import options"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:722
+#: build/wp.impex.dashboard.js:857
+msgid "Clean up existing post, page, media, block pattern, nav_menu an reusable block items"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:725
+#: build/wp.impex.dashboard.js:860
+msgid "Keep existing post, page, media, block pattern, nav_menu an reusable block items. Media might be partly overwritten by export"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:732
+msgid "Remove existing content before importing uploaded snapshot"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:734
+msgid "Import uploaded snapshot"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:737
+msgid "Additional actions on this import"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:745
+msgid "Edit import snapshot"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:759
+msgid "Delete import"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:760
+msgid "Are you really sure to delete import"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:814
+msgid "OK"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:846
+msgid "Import failed"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:851
+msgid "Export failed"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:866
+msgid "Remove existing content before import"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:881
+msgid "ImpEx"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:887
+msgid "Basic"
+msgstr ""
+
+#: build/wp.impex.dashboard.js:891
+msgid "Advanced"
+msgstr ""
+
+#: build/wp.impex.store.js:118
+msgid "Creating snapshot ..."
+msgstr ""
+
+#: build/wp.impex.store.js:130
+msgid "Uploading slices ..."
+msgstr ""
+
+#: build/wp.impex.store.js:137
+msgid "Importing slices ..."
+msgstr ""
+
+#: build/wp.impex.store.js:150
+msgid "Import completed"
+msgstr ""
+
+#: build/wp.impex.store.js:151
+msgid "Successfully finished import."
+msgstr ""
+
+#: build/wp.impex.store.js:178
+msgid "Export aborted"
+msgstr ""
+
+#: build/wp.impex.store.js:179
+msgid "You canceled the export or entered an invalid export name"
+msgstr ""
+
+#: build/wp.impex.store.js:239
+msgid "Export completed"
+msgstr ""
+
+#: build/wp.impex.store.js:240
+msgid "Successfully finished export."
+msgstr ""
