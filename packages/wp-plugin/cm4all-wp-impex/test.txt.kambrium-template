@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+cat << EOF
+environment is :
+#####################
+$(env)
+#####################
+kambrium.author_name=$(kambrium.author_name package.json)
+kambrium.author_email=$(kambrium.author_email package.json)
+EOF
