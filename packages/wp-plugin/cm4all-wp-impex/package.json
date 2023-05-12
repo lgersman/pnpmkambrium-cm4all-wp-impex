@@ -8,8 +8,9 @@
     "export",
     "migration"
   ],
-  "engines": {
-    "php": "8.1"
+  "config": {
+    "php_version": "8.1",
+    "wordpress_version": "6.0.2"
   },
   "devDependencies": {
     "@wordpress/i18n": "^4.21.0",
