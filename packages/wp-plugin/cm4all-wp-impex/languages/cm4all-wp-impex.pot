@@ -1,4 +1,4 @@
-# Copyright (C) 2023 Lars Gersmann, CM4all
+# Copyright (C) 2023 lars gersmann
 # This file is distributed under the same license as the cm4all-wp-impex plugin.
 msgid ""
 msgstr ""
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-05-04T12:21:47+00:00\n"
+"POT-Creation-Date: 2023-05-25T12:06:43+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 
@@ -26,11 +26,11 @@ msgid "ImpEx contributes extendable Import / Export functionality to WordPress"
 msgstr ""
 
 #. Author of the plugin
-msgid "Lars Gersmann, CM4all"
+msgid "lars gersmann"
 msgstr ""
 
 #. Author URI of the plugin
-msgid "https://cm4all.com"
+msgid "https://github.com/IONOS-WordPress/"
 msgstr ""
 
 #: inc/class-impex-export-rest-controller.php:142

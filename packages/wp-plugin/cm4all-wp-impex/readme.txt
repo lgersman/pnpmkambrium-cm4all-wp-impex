@@ -1,17 +1,18 @@
-=== ${PLUGIN_NAME} ===
-Contributors:      ${CONTRIBUTORS}
-Plugin Name:       ${PLUGIN_NAME}
-Plugin URI:        ${PLUGIN_URI}
+=== ${PACKAGE_NAME} ===
+
+Contributors:      ${AUTHORS}
+Plugin Name:       ${PACKAGE_NAME}
+Plugin URI:        ${HOMEPAGE}
 Tags:              ${TAGS}
-Requires at least: ${REQUIRES_AT_LEAST}
-Tested up to:      ${TESTED_UP_TO}
-Stable tag:        ${VERSION}
-Version:           ${VERSION}
-Requires PHP:      ${REQUIRES_PHP}
-License:           GPLv2 or later
-License URI:       https://www.gnu.org/licenses/gpl-2.0.html
-Author:            ${AUTHOR}
-Author URI:        ${AUTHOR_URI}
+Requires at least: ${REQUIRES_REQUIRES_AT_LEAST_WORDPRESS_VERSION}
+Tested up to:      ${WORDPRESS_VERSION}
+Stable tag:        ${PACKAGE_VERSION}
+Version:           ${PACKAGE_VERSION}
+Requires PHP:      ${PHP_VERSION}
+License:           ${LICENSE}
+License URI:       ${LICENSE_URI}
+Author:            ${AUTHORS}
+Author URI:        ${VENDOR}
 
 ${DESCRIPTION}
 
@@ -23,7 +24,7 @@ The primary goal for ImpEx is to provide a **true Open Source WordPress Plugin**
 
 **This plugin is in an early (but working) stage.**
 
-Impex provides : 
+Impex provides :
 
 * WordPress hooks for third-party plugins to expose their own data to ImpEx Import / Export without being dependent on Impex.
 
@@ -42,32 +43,32 @@ Impex provides :
 * ImpEx development relies heavily on PHP unit testing its feature set to be stable and consistent.
 
 * a [CLI](https://ionos-wordpress.github.io/cm4all-wp-impex/impex-cli.html) for importing/exporting data via ImpEx REST interface.
-  The ImpEx CLI can be used as an alternative to the ImpEx WP admin screen. 
+  The ImpEx CLI can be used as an alternative to the ImpEx WP admin screen.
 
 * related NPM package [@cm4all-wp-impex/generator](https://www.npmjs.com/package/@cm4all-wp-impex/generator) enabling transformation of any content to Impex Export format.
-  
-  Using this package you're able to convert any content to WordPress and import it using the ImpEx plugin. See the [Tutorial](https://ionos-wordpress.github.io/cm4all-wp-impex/cm4all-wp-impex-generator/static-website-tutorial.html) 
+
+  Using this package you're able to convert any content to WordPress and import it using the ImpEx plugin. See the [Tutorial](https://ionos-wordpress.github.io/cm4all-wp-impex/cm4all-wp-impex-generator/static-website-tutorial.html)
   or [watch the walk-trough at YouTube](https://www.youtube.com/watch?v=pjG69RmULYo).
 
 **Your help is welcome !!**
 
 == Frequently Asked Questions ==
 
-Impex uses modern browser features as building blocks. 
+Impex uses modern browser features as building blocks.
 
-Right know some of them might not be available in some browsers : 
+Right know some of them might not be available in some browsers :
 
 - [File System Access API](https://web.dev/file-system-access/) to export and import data to the local filesystem. This browser feature is mandatory.
 
-  Right now Chromium based browsers (except of Brave who disabled this feature) and Safari supporting the [File System Access API](https://web.dev/file-system-access/). 
+  Right now Chromium based browsers (except of Brave who disabled this feature) and Safari supporting the [File System Access API](https://web.dev/file-system-access/).
 
-  > As of now, it's unclear if and when Firefox will support the [File System Access API](https://web.dev/file-system-access/). 
+  > As of now, it's unclear if and when Firefox will support the [File System Access API](https://web.dev/file-system-access/).
 
   As an alternative you can use the [ImpEx CLI](./impex-cli.html) to trigger import/export operations on the commandline.
 
-- Depending on your browser version the Crypto API feature we use (`window.crypto.randomUUID`) may not be supported by your browser. 
+- Depending on your browser version the Crypto API feature we use (`window.crypto.randomUUID`) may not be supported by your browser.
 
-  As of now, [all "green" browser support it](https://developer.mozilla.org/en-US/docs/Web/API/Crypto/randomUUID). 
+  As of now, [all "green" browser support it](https://developer.mozilla.org/en-US/docs/Web/API/Crypto/randomUUID).
 
   But if you use an older version of a browser it might happen that Impex will not work since the browser feature is not available in your browser.
 
@@ -79,7 +80,7 @@ Please file bugs and feature requests at the [Impex plugin GitHub issues](https:
 
 = Why ImpE written in PHP 8 ? =
 
-Because PHP 8 
+Because PHP 8
 
 * is much faster than any previous PHP Version
 
@@ -91,7 +92,7 @@ If you prefer to use the PHP 8 version, you can download it from the [ImpEx Word
 
 = What's the current feature set ? =
 
-* ImpEx provides right now generic providers for 
+* ImpEx provides right now generic providers for
 
   * import/export WordPress posts/pages **including attachments/uploads** and custom post types
 

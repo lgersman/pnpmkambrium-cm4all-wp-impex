@@ -25,14 +25,6 @@ msgstr ""
 msgid "ImpEx contributes extendable Import / Export functionality to WordPress"
 msgstr ""
 
-#. Author of the plugin
-msgid "Lars Gersmann, CM4all"
-msgstr ""
-
-#. Author URI of the plugin
-msgid "https://cm4all.com"
-msgstr ""
-
 #: inc/class-impex-export-rest-controller.php:142
 #: inc/class-impex-export-rest-controller.php:161
 msgid "could not find export by id"
@@ -390,4 +382,12 @@ msgstr ""
 
 #: build/wp.impex.store.js:240
 msgid "Successfully finished export."
+msgstr ""
+
+#. Author of the plugin
+msgid "lars gersmann"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://github.com/IONOS-WordPress/"
 msgstr ""

@@ -6,11 +6,11 @@
  * Description: ImpEx contributes extendable Import / Export functionality to WordPress
  * Version: 1.5.7
  * Tags: import, export, migration
- * Requires PHP: 8.0
- * Requires at least: 5.7
+ * Requires PHP: 8.1
+ * Requires at least: 6.0.2
  * Tested up to: 6.2
- * Author: Lars Gersmann, CM4all
- * Author URI: https://cm4all.com
+ * Author: lars gersmann
+ * Author URI: https://github.com/IONOS-WordPress/
  * Domain Path: /languages
  **/
 
