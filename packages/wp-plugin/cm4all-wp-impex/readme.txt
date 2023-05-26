@@ -4,7 +4,7 @@ Contributors:      ${AUTHORS}
 Plugin Name:       ${PACKAGE_NAME}
 Plugin URI:        ${HOMEPAGE}
 Tags:              ${TAGS}
-Requires at least: ${REQUIRES_REQUIRES_AT_LEAST_WORDPRESS_VERSION}
+Requires at least: ${REQUIRES_AT_LEAST_WORDPRESS_VERSION}
 Tested up to:      ${WORDPRESS_VERSION}
 Stable tag:        ${PACKAGE_VERSION}
 Version:           ${PACKAGE_VERSION}
