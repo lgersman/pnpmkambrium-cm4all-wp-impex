@@ -1,3 +1,4 @@
 /*.code-workspace
 /TODO.md
 /packages/docs/gh-pages/book
+/.wp-env.override.json
