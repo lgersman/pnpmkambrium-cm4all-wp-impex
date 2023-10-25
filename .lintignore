@@ -6,3 +6,4 @@
 /.pnpm-store
 /packages/docs/gh-pages/book
 /packages/npm/generator/examples
+/wp-env-home

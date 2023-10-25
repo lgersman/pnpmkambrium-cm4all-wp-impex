@@ -4,7 +4,7 @@
  * Plugin Name: cm4all-wp-impex
  * Plugin URI: https://github.com/IONOS-WordPress/cm4all-wp-impex
  * Description: ImpEx contributes extendable Import / Export functionality to WordPress
- * Version: 1.5.7
+ * Version: 1.5.9
  * Tags: import, export, migration
  * Requires PHP: 8.1
  * Requires at least: 6.0.2
@@ -123,7 +123,7 @@ function enqueueClientAssets(bool $in_footer): string
           $in_footer
         );
 
-        // prefetch initial impex data 
+        // prefetch initial impex data
         $discoveryRequest = new \WP_REST_Request('GET', '/');
         $discoveryResponse = \rest_do_request($discoveryRequest);
 
@@ -186,7 +186,7 @@ function enqueueClientAssets(bool $in_footer): string
       2,
     );
 
-    // register dummy style 
+    // register dummy style
     wp_register_style(
       $CLIENT_ASSET_HANDLE,
       'dist/wp.impex.css'
