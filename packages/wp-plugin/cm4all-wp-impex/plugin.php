@@ -6,7 +6,7 @@
  * Description: ImpEx contributes extendable Import / Export functionality to WordPress
  * Version: 1.5.9
  * Tags: import, export, migration
- * Requires PHP: 8.1
+ * Requires PHP: 8.0
  * Requires at least: 6.0.2
  * Tested up to: 6.2
  * Author: lars gersmann
