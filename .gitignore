@@ -2,3 +2,4 @@
 /TODO.md
 /packages/docs/gh-pages/book
 /.wp-env.override.json
+/scripts/wp-env-afterStart.sh
