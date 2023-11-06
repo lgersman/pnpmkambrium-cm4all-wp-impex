@@ -47,8 +47,8 @@ interface AttachmentImporter
   const OPTION_OVERWRITE = 'wp-attachment-import-option-overwrite';
   const OPTION_OVERWRITE_DEFAULT = true;
 
-  // optional slice meta property of type array of string 
-  // if set in a slice, the imported attachment replace the references 
+  // optional slice meta property of type array of string
+  // if set in a slice, the imported attachment replace the references
   // of this property in the content of all posts / pages
   const SLICE_META_POST_REFERENCES = 'impex:post-references';
 }
@@ -111,7 +111,7 @@ class __AttachmentImporter
       $url = './' . \sanitize_title($post['post_title'] ?? pathinfo($path, PATHINFO_FILENAME)) . '.' . $fileExtension;
     }
 
-    /* 
+    /*
       code more or less duplicated from wordpress-importer function process_attachment
       https://github.com/WordPress/wordpress-importer/blob/e05f678835c60030ca23c9a186f50999e198a360/src/class-wp-import.php#L1009
     */
@@ -157,7 +157,7 @@ class __AttachmentImporter
     /*$attachment_invalid =*/
     // \wp_update_attachment_metadata($post_id, \wp_generate_attachment_metadata($post_id, $upload['file']));
 
-    // register url callback to call by client side to update 
+    // register url callback to call by client side to update
     // attachment metadata step by step
     $basedir = \wp_upload_dir()['basedir'];
     $this->transformationContext->addCallback(
@@ -166,7 +166,7 @@ class __AttachmentImporter
       'POST',
       [
         'post_id' => $post_id,
-        'file' => substr($upload['file'], strlen($basedir)+1),
+        'file' => substr($upload['file'], strlen($basedir) + 1),
       ],
     );
 
@@ -187,7 +187,7 @@ class __AttachmentImporter
       $this->url_remap[$parts['dirname'] . '/' . $name] = $parts_new['dirname'] . '/' . $name_new;
     }
 
-    // @TODO: any change to do this AFTER all images are uploaded ? 
+    // @TODO: any change to do this AFTER all images are uploaded ?
 
     // replace default url_remap with SLICE_META_POST_REFERENCES if exists
     $meta_post_references = $this->slice[Impex::SLICE_META][AttachmentImporter::SLICE_META_POST_REFERENCES] ?? null;
@@ -252,7 +252,7 @@ class __AttachmentImporter
    * patched version of wordpress-importer backfill_attachment_urls()
    * @see https://github.com/WordPress/wordpress-importer/blob/e05f678835c60030ca23c9a186f50999e198a360/src/class-wp-import.php#L1265
    */
-  // @TODO: any change to do this AFTER all images are uploaded ? 
+  // @TODO: any change to do this AFTER all images are uploaded ?
   function backfill_attachment_urls()
   {
     global $wpdb;
@@ -315,10 +315,10 @@ class __AttachmentImporter
     \register_rest_route(ImpexImportRESTController::NAMESPACE, AttachmentImporter::REST_API_ENDPOINT_UPDATE_METADATA, [
       'methods'  => \WP_REST_Server::EDITABLE,
       /**
-        * @param WP_REST_Request $request Full data about the request.
-        * @return WP_Error|WP_REST_Response
-        */
-      'callback' => function($request) {
+       * @param WP_REST_Request $request Full data about the request.
+       * @return WP_Error|WP_REST_Response
+       */
+      'callback' => function ($request) {
         $post_id = $request->get_param('post_id');
         $basedir = \wp_upload_dir()['basedir'];
         $file = $basedir . '/' . $request->get_param('file');
@@ -328,20 +328,20 @@ class __AttachmentImporter
           include(ABSPATH . 'wp-admin/includes/image.php');
         }
 
-        if(!function_exists('wp_read_video_metadata')) {
+        if (!function_exists('wp_read_video_metadata')) {
           include(ABSPATH . 'wp-admin/includes/media.php');
         }
-        
+
         \wp_update_attachment_metadata($post_id, \wp_generate_attachment_metadata($post_id, $file));
 
         $response = new \WP_REST_Response(true, 200);
         return $response;
       },
       /**
-        * @param WP_REST_Request $request Full data about the request.
-        * @return WP_Error|WP_REST_Response
-        */
-      'permission_callback' => function($request) {
+       * @param WP_REST_Request $request Full data about the request.
+       * @return WP_Error|WP_REST_Response
+       */
+      'permission_callback' => function ($request) {
         // @TODO: check a more specific permission
         return \current_user_can('import');
       },
@@ -359,7 +359,7 @@ class __AttachmentImporter
     $HANDLE = strtolower(str_replace('\\', '-', AttachmentImporter::PROVIDER_NAME));
     \cm4all\wp\impex\wp_enqueue_script(
       $HANDLE,
-      'dist/wp.impex.extension.import.attachment.js',
+      'build/wp.impex.extension.import.attachment.js',
       [$client_asset_handle, $client_asset_handle . '-debug'],
       $in_footer
     );

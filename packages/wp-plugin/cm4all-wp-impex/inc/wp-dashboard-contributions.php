@@ -12,11 +12,11 @@ if (!defined('ABSPATH')) {
 require_once __DIR__ . '/wp-wrapper-functions.php';
 
 const TITLE = 'Impex';
-// slug cannot be defined as const since constants need to be available at compile time 
+// slug cannot be defined as const since constants need to be available at compile time
 // => https://stackoverflow.com/questions/51000541/php-constant-expression-contains-invalid-operations
 define('IMPEX_SCREEN_PAGE_SLUG', str_replace("\\", '_', __NAMESPACE__));
 // ATTENTION : the '_page' suffix is important !
-// otherwise storeing the value via filter 'set-screen-option' will fail 
+// otherwise storeing the value via filter 'set-screen-option' will fail
 const SCREEN_OPTION_VERBOSE = IMPEX_SCREEN_PAGE_SLUG . '_' . 'verbose_page';
 
 \add_action(
@@ -82,7 +82,7 @@ const SCREEN_OPTION_VERBOSE = IMPEX_SCREEN_PAGE_SLUG . '_' . 'verbose_page';
         $IMPEX_CLIENT_HANDLE = enqueueClientAssets($IN_FOOTER);
         \cm4all\wp\impex\wp_enqueue_script(
           IMPEX_SCREEN_PAGE_SLUG,
-          'dist/wp.impex.dashboard.js',
+          'build/wp.impex.dashboard.js',
           [$IMPEX_CLIENT_HANDLE, 'wp-element', 'wp-api-fetch', 'wp-url', 'wp-i18n', 'wp-components', 'wp-data', 'wp-core-data'],
           $IN_FOOTER
         );
@@ -94,14 +94,14 @@ const SCREEN_OPTION_VERBOSE = IMPEX_SCREEN_PAGE_SLUG . '_' . 'verbose_page';
 
         \cm4all\wp\impex\wp_enqueue_style(
           IMPEX_SCREEN_PAGE_SLUG,
-          'dist/wp.impex.dashboard.css',
+          'build/wp.impex.dashboard.css',
           [$IMPEX_CLIENT_HANDLE, 'wp-components']
         );
 
-        /* 
+        /*
           prevent loading wp admin forms.css since it breaks gutenberg component styles
-          wp_register_style doesn't overwrite exiting style registrations so that we need to 
-          - remove the original style 
+          wp_register_style doesn't overwrite exiting style registrations so that we need to
+          - remove the original style
           - add a dummy style handle for 'forms'
         */
         \wp_deregister_style('forms');
