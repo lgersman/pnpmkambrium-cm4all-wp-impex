@@ -11,7 +11,7 @@ use cm4all\wp\impex\tests\phpunit\ImpexUnitTestcase;
 
 class TestImpexExportProfileCm4all extends ImpexUnitTestcase
 {
-  function setUp()
+  function setUp(): void
   {
     parent::setUp();
 

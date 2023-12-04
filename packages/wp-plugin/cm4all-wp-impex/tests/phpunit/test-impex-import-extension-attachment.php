@@ -14,7 +14,7 @@ class TestImpexImportExtensionAttachment extends ImpexUnitTestcase
 {
   const IMAGE = 'zdf-hitparade.jpg';
 
-  function tearDown()
+  function tearDown(): void
   {
     parent::tearDown();
 
@@ -26,7 +26,7 @@ class TestImpexImportExtensionAttachment extends ImpexUnitTestcase
     $this->remove_added_uploads();
   }
 
-  function setUp()
+  function setUp(): void
   {
     parent::setUp();
 
@@ -166,7 +166,7 @@ class TestImpexImportExtensionAttachment extends ImpexUnitTestcase
 
 
 
-    // create initial attachment  
+    // create initial attachment
     $post = $this->factory->post->create_and_get();
     $attachment_id = $this->factory->attachment->create_upload_object(__DIR__ . '/fixtures/uploads/images/' . self::IMAGE, $post->ID);
 

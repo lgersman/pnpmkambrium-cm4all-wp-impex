@@ -7,7 +7,7 @@ use cm4all\wp\impex\ImpexExportTransformationContext;
 
 abstract class ImpexUnitTestcase extends \WP_UnitTestCase
 {
-  public function setUp()
+  public function setUp(): void
   {
     /*
 		 * When running core tests, ensure that post types and taxonomies
@@ -22,16 +22,16 @@ abstract class ImpexUnitTestcase extends \WP_UnitTestCase
     self::_resetImpex();
   }
 
-  /** 
+  /**
    * Triggers the ImpEx actions for provider and profile registration so that all by default loaded prviders and profiles will be available.
-   * 
+   *
    * Regularly the Implex plugin will trigger the actions
    * - Impex::WP_ACTION_REGISTER_PROVIDERS
    * - Impex::WP_ACTION_REGISTER_PROFILES
-   * automatically. 
-   * 
+   * automatically.
+   *
    * But ImpexUnitTestcase->setUp resets all registered providers/profiles for convenience.
-   * 
+   *
    * So we need to trigger the registration actions again in rare cases
    */
   protected function __invokeImpexActions(): void
@@ -70,7 +70,7 @@ abstract class ImpexUnitTestcase extends \WP_UnitTestCase
     Impex::getInstance();
   }
 
-  public function tearDown()
+  public function tearDown(): void
   {
     parent::tearDown();
 

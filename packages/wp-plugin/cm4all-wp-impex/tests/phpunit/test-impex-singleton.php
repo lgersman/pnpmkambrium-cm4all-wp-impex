@@ -7,7 +7,7 @@ use Error;
 
 class TestImpexSingleton extends ImpexUnitTestcase
 {
-  public function setUp()
+  public function setUp(): void
   {
     // cleanup registered extensions before running test function
     $reset = function () {

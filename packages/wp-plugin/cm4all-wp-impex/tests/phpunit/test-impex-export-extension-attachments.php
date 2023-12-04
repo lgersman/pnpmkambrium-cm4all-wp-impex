@@ -9,7 +9,7 @@ use function cm4all\wp\impex\__registerAttachmentsExportProvider;
 
 class TestImpexExportExtensionAttachments extends ImpexUnitTestcase
 {
-  function tearDown()
+  function tearDown(): void
   {
     parent::tearDown();
 

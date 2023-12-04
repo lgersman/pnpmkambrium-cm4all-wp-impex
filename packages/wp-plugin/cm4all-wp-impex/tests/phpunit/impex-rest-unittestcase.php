@@ -6,7 +6,7 @@ use cm4all\wp\impex\Impex;
 
 abstract class ImpexRestUnitTestcase extends \WP_Test_REST_Controller_Testcase
 {
-  public function setUp()
+  public function setUp(): void
   {
     parent::setUp();
 

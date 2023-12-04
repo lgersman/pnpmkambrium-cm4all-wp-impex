@@ -12,7 +12,7 @@ use function cm4all\wp\impex\__registerContentImportProvider;
 
 class TestImpexImportExtensionContent extends ImpexUnitTestcase
 {
-  function setUp()
+  function setUp(): void
   {
     parent::setUp();
 
@@ -44,7 +44,7 @@ class TestImpexImportExtensionContent extends ImpexUnitTestcase
     }, 10, 2);
   }
 
-  function tearDown()
+  function tearDown(): void
   {
     parent::tearDown();
 
@@ -187,7 +187,7 @@ class TestImpexImportExtensionContent extends ImpexUnitTestcase
       $this->assertIsObject($t);
     }
 
-    // test import with valid user options 
+    // test import with valid user options
     $new_id_exported_user2 = self::factory()->user->create(['role' => 'editor', 'user_login' => 'new_id_exported_user2']);
     $users_before_import = \get_users();
     $this->assertCount(6, $users_before_import);
@@ -207,7 +207,7 @@ class TestImpexImportExtensionContent extends ImpexUnitTestcase
     $this->assertEmpty(array_filter($users_before_import, fn ($user) => $user->data->user_login === 'non_existing_user'));
     $this->assertCount(1, array_filter($users_after_import, fn ($user) => $user->data->user_login === 'non_existing_user'));
 
-    // test imported post is attached to user 
+    // test imported post is attached to user
     // $post = \get_page_by_title('post from exported_user', \OBJECT, 'post');
     // \get_page_by_title iss deprecated since wp 6.2
     $posts = \get_posts([
@@ -216,7 +216,7 @@ class TestImpexImportExtensionContent extends ImpexUnitTestcase
       'post_status'            => 'all',
       'numberposts'            => 1,
     ]);
-    $post = ! empty( $posts ) ? $post = $posts[0] : null;
+    $post = !empty($posts) ? $post = $posts[0] : null;
 
     $this->assertNotNull($post, 'post should be recreated by import');
     // we have assigned the post to user 'existing_user' in the import options
@@ -231,7 +231,7 @@ class TestImpexImportExtensionContent extends ImpexUnitTestcase
       'post_status'            => 'all',
       'numberposts'            => 1,
     ]);
-    $post = ! empty( $posts ) ? $post = $posts[0] : null;
+    $post = !empty($posts) ? $post = $posts[0] : null;
 
     $this->assertNotNull($post, 'post should be recreated by import');
     // we have assigned the post to user 'new_id_exported_user2' in the import options
@@ -245,7 +245,7 @@ class TestImpexImportExtensionContent extends ImpexUnitTestcase
       'post_status'            => 'all',
       'numberposts'            => 1,
     ]);
-    $post = ! empty( $posts ) ? $post = $posts[0] : null;
+    $post = !empty($posts) ? $post = $posts[0] : null;
 
     $this->assertNotNull($post, 'post should be recreated by import');
     $this->assertEquals($post->post_author, \get_user_by('login', 'existing_user')->ID);
@@ -258,7 +258,7 @@ class TestImpexImportExtensionContent extends ImpexUnitTestcase
       'post_status'            => 'all',
       'numberposts'            => 1,
     ]);
-    $post = ! empty( $posts ) ? $post = $posts[0] : null;
+    $post = !empty($posts) ? $post = $posts[0] : null;
     $this->assertNotNull($post, 'post should be recreated by import');
     $this->assertEquals($post->post_author, \get_user_by('login', 'non_existing_user')->ID);
 
@@ -270,7 +270,7 @@ class TestImpexImportExtensionContent extends ImpexUnitTestcase
       'post_status'            => 'all',
       'numberposts'            => 1,
     ]);
-    $post = ! empty( $posts ) ? $post = $posts[0] : null;
+    $post = !empty($posts) ? $post = $posts[0] : null;
 
     $this->assertNotNull($post, 'post should be recreated by import');
     $this->assertEquals($post->post_author, \get_user_by('login', 'user_with_different_id')->ID);
@@ -278,7 +278,7 @@ class TestImpexImportExtensionContent extends ImpexUnitTestcase
 
   function testContentImporterCategories()
   {
-    /* 
+    /*
       setup test data
     */
     $slices = (function (): array {
@@ -323,7 +323,7 @@ class TestImpexImportExtensionContent extends ImpexUnitTestcase
     $this->assertTrue(in_array('simple', array_column($categories, 'name')), 'only category "simple" should exist');
     $this->assertEmpty(\get_posts(), 'no posts should exist');
 
-    // execute import 
+    // execute import
     $retVal = call_user_func($provider->callback, $slices[0], [], $importContext,);
     $this->assertTrue($retVal, 'importer callback expected to return successful');
 
@@ -405,7 +405,7 @@ class TestImpexImportExtensionContent extends ImpexUnitTestcase
     $this->assertCount(4, $terms, 'only terms "food", "fruits", "apples" and "pears" should exist');
     $this->assertEmpty(\get_posts(), 'no posts should exist');
 
-    // execute import 
+    // execute import
     $retVal = call_user_func($provider->callback, $slices[0], [], $importContext,);
     $this->assertTrue($retVal, 'importer callback expected to return successful');
 
@@ -428,7 +428,7 @@ class TestImpexImportExtensionContent extends ImpexUnitTestcase
     $success = \unregister_taxonomy('products');
     $this->assertTrue($success, 'taxonomy "products" should be unregistered');
 
-    // execute import 
+    // execute import
     $retVal = call_user_func($provider->callback, $slices[0], [], $importContext,);
     $this->assertTrue($retVal, 'importer callback expected to return successful');
 
@@ -523,7 +523,7 @@ class TestImpexImportExtensionContent extends ImpexUnitTestcase
     $tags =  \get_tags(['hide_empty' => false,]);
     $this->assertCount(2, $tags, 'only terms "alpha", and "beta" should exist');
 
-    // execute import 
+    // execute import
     $retVal = call_user_func($provider->callback, $slices[0], [], $importContext,);
     $this->assertTrue($retVal, 'importer callback expected to return successful');
 
@@ -551,7 +551,7 @@ class TestImpexImportExtensionContent extends ImpexUnitTestcase
       $user = self::factory()->user->create(['user_login' => 'editor']);
       \wp_set_current_user($user);
 
-      // create a nav menu 
+      // create a nav menu
       $navmenu_id = \wp_create_nav_menu('my navmenu');
 
       // create some posts and attach them to the nav menu
@@ -609,7 +609,7 @@ class TestImpexImportExtensionContent extends ImpexUnitTestcase
     $provider = __registerContentImportProvider();
     $importContext = $this->_createImpexImportTransformationContextMock();
 
-    // execute import 
+    // execute import
     $retVal = call_user_func($provider->callback, $slices[0], [], $importContext,);
     $this->assertTrue($retVal, 'importer callback expected to return successful');
 
