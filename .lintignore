@@ -7,3 +7,5 @@
 /packages/docs/gh-pages/book
 /packages/npm/generator/examples
 /wp-env-home
+packages/wp-plugin/*/vendor/
+packages/wp-plugin/*/composer.lock
