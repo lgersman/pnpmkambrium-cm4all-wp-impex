@@ -16,6 +16,8 @@ return static function (RectorConfig $rectorConfig): void {
   // ]);
   // $rectorConfig->paths([__DIR__ . '/dist/cm4all-wp-impex-php7.4.0']); #
 
+  $rectorConfig->skip([__DIR__ . '/vendor']);
+
   // $parameters->set(Option::PARALLEL, false);
   $rectorConfig->disableParallel();
 

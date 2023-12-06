@@ -1,12 +1,5 @@
 {
-  "name": "cm4all/wp-impex",
   "require-dev": {
     "yoast/phpunit-polyfills": "^2.0"
-  },
-  "authors": [
-    {
-      "name": "lars gersmann",
-      "email": "lars.gersmann@cm4all.com"
-    }
-  ]
+  }
 }
