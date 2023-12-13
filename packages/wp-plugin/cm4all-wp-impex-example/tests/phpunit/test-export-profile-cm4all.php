@@ -25,9 +25,9 @@ class TestImpexExportProfileCm4all extends ImpexUnitTestcase
     // \activate_plugin('cm4all-wordpress/plugin.php');
     \activate_plugin('cm4all-wp-impex/plugin.php');
 
-    \activate_plugin('complianz-gdpr/complianz-gpdr.php');
-    \activate_plugin('ninja-forms/ninja-forms.php');
-    \activate_plugin('wp-content/plugins/ultimate-maps-by-supsystic/ums.php');
+    // \activate_plugin('complianz-gdpr/complianz-gpdr.php');
+    // \activate_plugin('ninja-forms/ninja-forms.php');
+    // \activate_plugin('wp-content/plugins/ultimate-maps-by-supsystic/ums.php');
 
     // force reexecution of the import profile registration since we depend on the "all" import provider
     require __DIR__ . '/../../../cm4all-wp-impex/profiles/import-profile-all.php';
