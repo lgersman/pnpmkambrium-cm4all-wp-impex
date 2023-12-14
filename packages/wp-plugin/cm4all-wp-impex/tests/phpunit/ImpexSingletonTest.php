@@ -5,7 +5,7 @@ namespace cm4all\wp\impex\tests\phpunit;
 use cm4all\wp\impex\Impex;
 use Error;
 
-class TestImpexSingleton extends ImpexUnitTestcase
+class ImpexSingletonTest extends ImpexUnitTestcase
 {
   public function setUp(): void
   {

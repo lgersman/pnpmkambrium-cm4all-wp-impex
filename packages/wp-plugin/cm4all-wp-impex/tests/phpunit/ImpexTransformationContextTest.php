@@ -10,7 +10,7 @@ use cm4all\wp\impex\ImpexRuntimeException;
 use cm4all\wp\impex\tests\phpunit\ImpexUnitTestcase;
 use RuntimeException;
 
-class TestImpexTransformationContext extends ImpexUnitTestcase
+class ImpexTransformationContextTest extends ImpexUnitTestcase
 {
   function testInvalidProfileNameShouldFail()
   {

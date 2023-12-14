@@ -11,7 +11,7 @@ use cm4all\wp\impex\ImpexExportTransformationContext;
 use cm4all\wp\impex\ImpexPart;
 use cm4all\wp\impex\WpOptionsExporter;
 
-class TestImpexExport extends ImpexUnitTestcase
+class ImpexExportTest extends ImpexUnitTestcase
 {
   function setUp(): void
   {

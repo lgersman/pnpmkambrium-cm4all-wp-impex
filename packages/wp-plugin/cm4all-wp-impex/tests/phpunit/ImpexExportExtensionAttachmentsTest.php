@@ -7,7 +7,7 @@ use cm4all\wp\impex\Impex;
 
 use function cm4all\wp\impex\__registerAttachmentsExportProvider;
 
-class TestImpexExportExtensionAttachments extends ImpexUnitTestcase
+class ImpexExportExtensionAttachmentsTest extends ImpexUnitTestcase
 {
   function tearDown(): void
   {

@@ -9,10 +9,10 @@
 	>
 	<testsuites>
 		<testsuite name="cm4all-wp-impex">
-			<directory prefix="test-" suffix=".php">./</directory>
+			<directory suffix="Test.php">./</directory>
 		</testsuite>
     <testsuite name="cm4all-wp-impex-example">
-			<directory prefix="test-" suffix=".php">./../../../cm4all-wp-impex-example/tests/phpunit</directory>
+			<directory suffix="Test.php">./../../../cm4all-wp-impex-example/tests/phpunit</directory>
 		</testsuite>
 	</testsuites>
 

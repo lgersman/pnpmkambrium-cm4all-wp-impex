@@ -4,7 +4,7 @@ namespace cm4all\wp\impex\tests\phpunit;
 
 use cm4all\wp\impex\Impex;
 
-class TestImpexPartProfiles extends ImpexUnitTestcase
+class ImpexPartProfilesTest extends ImpexUnitTestcase
 {
   function testExportProfileAddTask(): void
   {

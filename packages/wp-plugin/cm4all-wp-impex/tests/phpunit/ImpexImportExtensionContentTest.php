@@ -10,7 +10,7 @@ use cm4all\wp\impex\ImpexImportRuntimeException;
 use function cm4all\wp\impex\__registerContentExportProvider;
 use function cm4all\wp\impex\__registerContentImportProvider;
 
-class TestImpexImportExtensionContent extends ImpexUnitTestcase
+class ImpexImportExtensionContentTest extends ImpexUnitTestcase
 {
   function setUp(): void
   {

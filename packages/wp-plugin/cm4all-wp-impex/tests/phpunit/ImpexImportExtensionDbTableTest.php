@@ -11,7 +11,7 @@ use cm4all\wp\impex\ImpexImportTransformationContext;
 use function cm4all\wp\impex\__registerDbTablesExportProvider;
 use function cm4all\wp\impex\__registerDbTableImportProvider;
 
-class TestImpexImportExtensionDbTable extends ImpexUnitTestcase
+class ImpexImportExtensionDbTableTest extends ImpexUnitTestcase
 {
   function setUp(): void
   {

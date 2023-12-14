@@ -10,7 +10,7 @@ use cm4all\wp\impex\ImpexImportTransformationContext;
 
 use function cm4all\wp\impex\__registerAttachmentImportProvider;
 
-class TestImpexImportExtensionAttachment extends ImpexUnitTestcase
+class ImpexImportExtensionAttachmentTest extends ImpexUnitTestcase
 {
   const IMAGE = 'zdf-hitparade.jpg';
 

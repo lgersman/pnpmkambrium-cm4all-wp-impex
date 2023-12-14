@@ -9,7 +9,7 @@ use cm4all\wp\impex\ImpexImport;
 use cm4all\wp\impex\ImpexImportTransformationContext;
 use cm4all\wp\impex\ImpexPart;
 
-class TestImpexImport extends ImpexUnitTestcase
+class ImpexImportTest extends ImpexUnitTestcase
 {
   function setUp(): void
   {
@@ -45,7 +45,7 @@ class TestImpexImport extends ImpexUnitTestcase
     global $wpdb;
     $wpdb->query('DROP TABLE IF EXISTS ' . $wpdb->prefix . Impex::DB_SNAPSHOTS_TABLENAME);
 
-    $this->user = $this->factory->user->create(['role' => 'administrator', 'user_login' => 'test-admin']);
+    $this->user = \WP_UnitTestCase_Base::factory()->user->create(['role' => 'administrator', 'user_login' => 'test-admin']);
   }
 
   function tearDown(): void

@@ -7,7 +7,7 @@ use cm4all\wp\impex\ContentExporter;
 
 use function cm4all\wp\impex\__registerContentExportProvider;
 
-class TestImpexExportExtensionContent extends ImpexUnitTestcase
+class ImpexExportExtensionContentTest extends ImpexUnitTestcase
 {
   function testWordpressExportExporter(): void
   {

@@ -12,13 +12,13 @@ use cm4all\wp\impex\ImpexRestController;
 /**
  * @group restapi
  */
-class TestImpexImportRestController extends ImpexRestUnitTestcase
+class ImpexImportRestControllerTest extends ImpexRestUnitTestcase
 {
   public function setUp(): void
   {
     parent::setUp();
 
-    $this->user = $this->factory->user->create(['role' => 'administrator', 'user_login' => 'test-admin']);
+    $this->user = \WP_UnitTestCase_Base::factory()->user->create(['role' => 'administrator', 'user_login' => 'test-admin']);
   }
 
   /*

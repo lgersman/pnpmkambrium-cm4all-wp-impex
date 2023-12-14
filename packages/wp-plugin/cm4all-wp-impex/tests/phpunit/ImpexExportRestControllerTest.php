@@ -12,7 +12,7 @@ use cm4all\wp\impex\ImpexRestController;
 /**
  * @group restapi
  */
-class TestImpexExportRestController extends ImpexRestUnitTestcase
+class ImpexExportRestControllerTest extends ImpexRestUnitTestcase
 {
   const EXPORT_PROVIDER_SLICE_TAG = 'custom-export-provider-tag';
 
@@ -20,7 +20,7 @@ class TestImpexExportRestController extends ImpexRestUnitTestcase
   {
     parent::setUp();
 
-    $this->user = $this->factory->user->create(['role' => 'administrator', 'user_login' => 'test-admin']);
+    $this->user = \WP_UnitTestCase_Base::factory()->user->create(['role' => 'administrator', 'user_login' => 'test-admin']);
   }
 
   protected function __createExportProfile(string $name, array $providers): ImpexExportProfile

@@ -7,7 +7,7 @@ use cm4all\wp\impex\ImpexPart;
 /**
  * @TODO: move testExportExtractWithOptions to this class
  */
-class TestImpexPart extends ImpexUnitTestcase
+class ImpexPartTest extends ImpexUnitTestcase
 {
   function testGetInstanceFails(): void
   {

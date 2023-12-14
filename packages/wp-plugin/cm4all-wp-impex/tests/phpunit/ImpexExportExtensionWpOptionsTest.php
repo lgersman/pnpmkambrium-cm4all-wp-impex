@@ -7,7 +7,7 @@ use cm4all\wp\impex\WpOptionsExporter;
 
 use function cm4all\wp\impex\__registerWpOptionsExportProvider;
 
-class TestImpexExportExtensionWpOptions extends ImpexUnitTestcase
+class ImpexExportExtensionWpOptionsTest extends ImpexUnitTestcase
 {
   function testWpOptionsExporterProvider(): void
   {

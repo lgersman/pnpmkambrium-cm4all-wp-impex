@@ -99,5 +99,5 @@ function importSQL($sqlfile)
   }
 }
 
-require_once __DIR__ . '/impex-unittestcase.php';
-require_once __DIR__ . '/impex-rest-unittestcase.php';
+require_once __DIR__ . '/ImpexUnitTestcase.php';
+require_once __DIR__ . '/ImpexRestUnitTestcase.php';
