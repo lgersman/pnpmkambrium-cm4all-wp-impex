@@ -50,7 +50,20 @@ wp-env-phpunit: ARGS ?=
 wp-env-phpunit: wp-env-is-started
 > $(MAKE) wp-env-sh CONTAINER='tests-wordpress' ARGS='XDEBUG_CONFIG="client_host=host.docker.internal" /var/www/html/wp-content/plugins/cm4all-wp-impex/vendor/bin/phpunit -c /var/www/html/wp-content/plugins/cm4all-wp-impex/tests/phpunit/phpunit.xml $(ARGS)'
 
-# .PHONY: test-phpunit-single-test
-# #HELP: select testcase to run interactively with fzf
-# test-phpunit-single-test: node_modules $(WP_ENV_HOME) plugins/cm4all-wp-impex/vendor/autoload.php
-# > find plugins/*/tests/phpunit -name "test-*.php" | fzf --bind 'enter:execute(make test-phpunit ARGS="--verbose --filter={}"; kill $$PPID)' ||:
+# HELP<<EOF
+# works just like `wp-env-phpunit` target but interactive
+#
+# example: `make wp-env-phpunit-interactive`
+#
+#  lets you select and run phpunit testcases
+#
+# example: `make wp-env-phpunit-interactive ARGS='--verbose --debug'`
+#
+# lets you select and run phpunit testcases. testcases will be executed whit ARGS supplied to phpunit command
+#
+# EOF
+.PHONY: wp-env-phpunit-interactive
+wp-env-phpunit-interactive: ARGS ?=
+wp-env-phpunit-interactive: wp-env-is-started
+> # @TODO: multiple filters doenst work (yet)
+> find packages/wp-plugin/cm4all-wp-impex/tests/phpunit -name "*Test.php" -exec basename {} .php \; | fzf --no-mouse --multi --bind 'enter:execute(make wp-env-phpunit ARGS="--filter={+} $(ARGS)"; kill $$PPID)' ||:
