@@ -67,3 +67,22 @@ wp-env-phpunit-interactive: ARGS ?=
 wp-env-phpunit-interactive: wp-env-is-started
 > # @TODO: multiple filters doenst work (yet)
 > find packages/wp-plugin/cm4all-wp-impex/tests/phpunit -name "*Test.php" -exec basename {} .php \; | fzf --no-mouse --multi --bind 'enter:execute(make wp-env-phpunit ARGS="--filter={+} $(ARGS)"; kill $$PPID)' ||:
+
+# DOCKER_IMPEXCLI_PHPUNIT_IMAGE := cm4all-wp-impex/impex-cli-phpunit
+# HELP<<EOF
+# starts the wp-cli tests
+#
+# example: `make impex-cli-tests`
+#
+#  run impex-cli phpunit testcases
+#
+# example: `make impex-cli-tests ARGS='--verbose --debug'`
+#
+# lets you select and run phpunit testcases. testcases will be executed whit ARGS supplied to phpunit command
+#
+# EOF
+# .PHONY: impex-cli-tests
+# impex-cli-tests: ARGS ?=
+# impex-cli-tests: wp-env-is-started
+# > # 2 options : either reuse the wp-env contaer (how is its name ?) or create a new one locally exclusively for impex-cli tests
+# > $(MAKE) wp-env-sh CONTAINER='tests-wordpress' ARGS='XDEBUG_CONFIG="client_host=host.docker.internal" /var/www/html/wp-content/plugins/cm4all-wp-impex/vendor/bin/phpunit -c /var/www/html/wp-content/plugins/cm4all-wp-impex/tests/phpunit/phpunit.xml $(ARGS) --testsuite=ImpexCliTestSuite'
