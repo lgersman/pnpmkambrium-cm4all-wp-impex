@@ -8,14 +8,7 @@
 >
 	<testsuites>
 		<testsuite name="impex-cli">
-			<directory 
-        phpVersion="8.0.0" 
-        phpVersionOperator=">=" 
-        prefix="test-" 
-        suffix=".php"
-      >
-        ./
-      </directory>
+			<directory phpVersion="8.0.0" phpVersionOperator=">=" suffix="Test.php">./</directory>
 		</testsuite>
 	</testsuites>
 </phpunit>

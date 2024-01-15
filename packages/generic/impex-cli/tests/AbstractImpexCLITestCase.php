@@ -20,7 +20,7 @@ function impex_cli($operation, ...$args): array
     \cm4all\wp\impex\cli\main([
       realpath(__DIR__ . '/../impex-cli/impex-cli.php'),
       $operation,
-      '-rest-url=http://host.docker.internal:8889/wp-json',
+      '-rest-url=http://localhost:80/wp-json',
       '-username=admin',
       '-password=password',
       ...$args,
