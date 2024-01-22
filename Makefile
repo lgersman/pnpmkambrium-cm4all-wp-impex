@@ -11,8 +11,7 @@ clean: BEFORE_CLEAN_HOOKS += $(IMPEX_BEFORE_CLEAN_HOOKS)
 #
 IMPEX_GIT_CLEAN_ARGS := -e '!/.wp-env.json' \
   -e '!/.wp-env.override.json' \
-  -e '!/.wp-env-afterStart.sh' \
-  -e '!/TODO.md'
+  -e '!/.wp-env-afterStart.sh'
 
 clean: GIT_CLEAN_ARGS += $(IMPEX_GIT_CLEAN_ARGS) -e '!.vscode/launch.json' -e '!/wp-env-backup'
 distclean: GIT_CLEAN_ARGS += $(IMPEX_GIT_CLEAN_ARGS)
