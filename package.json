@@ -19,7 +19,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@changesets/cli": "2.25.2",
+    "@changesets/cli": "2.27.1",
     "@commitlint/cli": "17.2.0",
     "@commitlint/config-conventional": "17.2.0",
     "@pnpmkambrium/core": "link:../pnpmkambrium/packages/npm/core",
