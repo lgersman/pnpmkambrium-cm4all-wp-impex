@@ -1,9 +1,13 @@
 {
   "name": "@pnpmkambrium-cm4all-wp-impex/gh-pages",
+  "private": true,
   "version": "1.5.7",
   "description": "documentation of the WordPress ImpEx plugin",
   "author": {
     "email": "lars.gersmann@cm4all.com",
     "name": "lars gersmann"
+  },
+  "devDependencies": {
+    "@pnpmkambrium-cm4all-wp-impex/generator": "workspace:*"
   }
 }

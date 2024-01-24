@@ -72,7 +72,11 @@ importers:
         specifier: ^4.1.0
         version: 4.6.0(stylelint@14.5.1)
 
-  packages/docs/gh-pages: {}
+  packages/docs/gh-pages:
+    devDependencies:
+      '@pnpmkambrium-cm4all-wp-impex/generator':
+        specifier: workspace:*
+        version: link:../../npm/generator
 
   packages/generic/impex-cli: {}
 
