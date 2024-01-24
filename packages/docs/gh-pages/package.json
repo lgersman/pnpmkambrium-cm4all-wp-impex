@@ -7,7 +7,7 @@
     "email": "lars.gersmann@cm4all.com",
     "name": "lars gersmann"
   },
-  "devDependencies": {
-    "@pnpmkambrium-cm4all-wp-impex/generator": "workspace:*"
+  "dependencies": {
+    "@pnpmkambrium-cm4all-wp-impex/generator": "workspace:^"
   }
 }
