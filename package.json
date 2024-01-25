@@ -40,5 +40,12 @@
     "stylelint-config-recommended-scss": "^5.0.2",
     "stylelint-scss": "^4.1.0",
     "@wordpress/env": "8.10.0"
+  },
+  "dependencies": {
+    "@pnpmkambrium-cm4all-wp-impex/gh-pages": "workspace:^",
+    "@pnpmkambrium-cm4all-wp-impex/impex-cli": "workspace:^",
+    "@pnpmkambrium-cm4all-wp-impex/generator": "workspace:^",
+    "@pnpmkambrium-cm4all-wp-impex/cm4all-wp-impex": "workspace:^",
+    "@pnpmkambrium-cm4all-wp-impex/cm4all-wp-impex-example": "workspace:^"
   }
 }
