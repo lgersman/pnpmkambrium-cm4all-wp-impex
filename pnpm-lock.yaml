@@ -7,6 +7,22 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@pnpmkambrium-cm4all-wp-impex/cm4all-wp-impex':
+        specifier: workspace:^
+        version: link:packages/wp-plugin/cm4all-wp-impex
+      '@pnpmkambrium-cm4all-wp-impex/cm4all-wp-impex-example':
+        specifier: workspace:^
+        version: link:packages/wp-plugin/cm4all-wp-impex-example
+      '@pnpmkambrium-cm4all-wp-impex/generator':
+        specifier: workspace:^
+        version: link:packages/npm/generator
+      '@pnpmkambrium-cm4all-wp-impex/gh-pages':
+        specifier: workspace:^
+        version: link:packages/docs/gh-pages
+      '@pnpmkambrium-cm4all-wp-impex/impex-cli':
+        specifier: workspace:^
+        version: link:packages/generic/impex-cli
     devDependencies:
       '@changesets/cli':
         specifier: 2.27.1

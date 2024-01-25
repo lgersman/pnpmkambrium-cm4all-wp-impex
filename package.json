@@ -1,7 +1,7 @@
 {
   "name": "pnpmkambrium-cm4all-wp-impex",
   "private": "true",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "test repo for migrating impex to pnpmkambrium",
   "scripts": {
     "prepare": "(printenv npm_config_user_agent | grep 'pnpm') && (make --silent init || echo \"failed to initialize @pnpmkambrium/core : please run 'make --silent -f node_modules/@pnpmkambrium/core/make/make.mk init  manually'\")"
