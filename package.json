@@ -1,6 +1,5 @@
 {
   "name": "pnpmkambrium-cm4all-wp-impex",
-  "private": "false",
   "version": "1.0.1",
   "description": "test repo for migrating impex to pnpmkambrium",
   "scripts": {
