@@ -33,9 +33,9 @@ export default async function (settings) {
 
   const actions = {
     // this is a redux thunk (see https://make.wordpress.org/core/2021/10/29/thunks-in-gutenberg/)
-    createAndUploadConsumeImport: (importProfile, cleanupContent, screenContext) =>
+    createAndUploadConsumeImport: (importProfile, importOptions, screenContext) =>
       async function* ({ dispatch, registry, resolveSelect, select }) {
-        debug({ importProfile, cleanupContent });
+        debug({ importProfile, importOptions });
 
         let importDirHandle = null;
         // showDirectoryPicker will throw a DOMException in case the user pressed cancel
@@ -82,15 +82,7 @@ export default async function (settings) {
             message: __('Importing slices ...', 'cm4all-wp-impex'),
           };
 
-          await dispatch.consumeImport(
-            createdImport.id,
-            {
-              // @see PHP class ImpexExport::OPTION_CLEANUP_CONTENTS
-              'impex-import-option-cleanup_contents': cleanupContent,
-            },
-            null,
-            null,
-          );
+          await dispatch.consumeImport(createdImport.id, importOptions, null, null);
 
           await (yield {
             type: 'info',
