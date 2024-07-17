@@ -1,7 +1,7 @@
 {
   "name": "pnpmkambrium-cm4all-wp-impex",
   "version": "1.0.1",
-  "description": "xxx test repo for migrating impex to pnpmkambrium",
+  "description": "ImpEx is a Wordpress plugin that allows you to import and export data from/to your WordPress site.",
   "scripts": {
     "prepare": "(printenv npm_config_user_agent | grep 'pnpm') && (make --silent init || echo \"failed to initialize @pnpmkambrium/core : please run 'make --silent -f node_modules/@pnpmkambrium/core/make/make.mk init  manually'\")"
   },
@@ -9,7 +9,7 @@
     "pnpm"
   ],
   "author": {
-    "email": "lars.gersmann@cm4all.com",
+    "email": "lars.gersmann@ionos.com",
     "name": "lars gersmann"
   },
   "repository": {

@@ -10,7 +10,7 @@
   ],
   "license": "GPL-2",
   "config": {
-    "php_version": "8.1",
-    "wordpress_version": "6.0.2"
+    "php_version": "8.3",
+    "wordpress_version": "6.6.0"
   }
 }

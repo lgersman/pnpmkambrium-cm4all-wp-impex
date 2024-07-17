@@ -4,10 +4,10 @@
  * Plugin Name: cm4all-wp-impex-example
  * Plugin URI: https://github.com/IONOS-WordPress/
  * Description: Example plugin contributing additional Importer/Exporter facilities to ImpEx plugin
- * Version: 1.5.7
+ * Version: 1.6.0
  * Tags: import, export, migration
  * Requires PHP: 8.0
- * Requires at least: 5.7
+ * Requires at least: 6.6.0
  * Tested up to: 6.2
  * Author: lars gersmann
  * Author URI: https://github.com/IONOS-WordPress/
