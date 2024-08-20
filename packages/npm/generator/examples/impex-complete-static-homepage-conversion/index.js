@@ -4,17 +4,14 @@
  *  @cm4all-wp-impex/generator usage example converting a whole static homepage to an impex export
  */
 
-import { resolve, join, extname, dirname, basename } from "path";
-import { readdir, readFile, mkdir, rm, writeFile, copyFile } from "fs/promises";
-import { ImpexTransformer, ImpexSliceFactory } from "../../src/index.js";
+import { resolve, join, extname, dirname, basename } from 'path';
+import { readdir, readFile, mkdir, rm, writeFile, copyFile } from 'fs/promises';
+import { ImpexTransformer, ImpexSliceFactory } from '../../src/index.js';
 
 /**
  * STATIC_HOMEPAGE_DIRECTORY is the directory containing the static homepage
  */
-const STATIC_HOMEPAGE_DIRECTORY = new URL(
-  "homepage-dr-mustermann",
-  import.meta.url
-).pathname;
+const STATIC_HOMEPAGE_DIRECTORY = new URL('homepage-dr-mustermann', import.meta.url).pathname;
 
 /**
  * generator function yielding matched files recursively
@@ -53,13 +50,13 @@ function setup() {
   ImpexTransformer.setup({
     onDomReady(document, options = { path: null }) {
       // replace <header> elements with the <ul> child
-      for (const section of document.querySelectorAll("header")) {
-        const ul = document.querySelector("ul.pure-menu-list");
+      for (const section of document.querySelectorAll('header')) {
+        const ul = document.querySelector('ul.pure-menu-list');
         section.replaceWith(ul.cloneNode(true));
       }
 
       // replace <section> elements with its inner contents
-      for (const section of document.querySelectorAll("section")) {
+      for (const section of document.querySelectorAll('section')) {
         for (const child of section.childNodes) {
           section.parentNode.insertBefore(child.cloneNode(true), section);
         }
@@ -67,8 +64,8 @@ function setup() {
       }
 
       // replace <footer> elements with <p>
-      for (const footer of document.querySelectorAll("footer")) {
-        const paragraph = document.createElement("p");
+      for (const footer of document.querySelectorAll('footer')) {
+        const paragraph = document.createElement('p');
         //paragraph.setAttribute("class", "footer");
         paragraph.innerHTML = footer.innerHTML;
         footer.replaceWith(paragraph);
@@ -76,18 +73,14 @@ function setup() {
 
       if (options?.path) {
         // grab all image references and remember them for later processing
-        for (const img of document.querySelectorAll("img")) {
-          const src = img.getAttribute("src");
+        for (const img of document.querySelectorAll('img')) {
+          const src = img.getAttribute('src');
 
           // compute image path relative to static webpage directory
-          const imgPath = resolve(
-            join(STATIC_HOMEPAGE_DIRECTORY, src)
-          ).substring(STATIC_HOMEPAGE_DIRECTORY);
+          const imgPath = resolve(join(STATIC_HOMEPAGE_DIRECTORY, src)).substring(STATIC_HOMEPAGE_DIRECTORY);
 
           // add reference to image path
-          (
-            img2imgSrc_mappings[imgPath] || (img2imgSrc_mappings[imgPath] = [])
-          ).push(src);
+          (img2imgSrc_mappings[imgPath] || (img2imgSrc_mappings[imgPath] = [])).push(src);
         }
       }
     },
@@ -109,17 +102,17 @@ async function main() {
 
     switch (extname(res)) {
       // stick HTML files into htmlResources
-      case ".html":
+      case '.html':
         htmlResources.push({ resource });
-        console.log("HTML %s", resource);
+        console.log('HTML %s', resource);
         break;
       // stick media files into attachmentResources
-      case ".jpeg":
-      case ".jpg":
-      case ".gif":
-      case ".png":
+      case '.jpeg':
+      case '.jpg':
+      case '.gif':
+      case '.png':
         attachmentResources.push({ resource });
-        console.log("ATTACHMENT %s", resource);
+        console.log('ATTACHMENT %s', resource);
         break;
     }
   }
@@ -128,8 +121,7 @@ async function main() {
   const slicePathGenerator = ImpexSliceFactory.PathGenerator();
 
   // compute target directory
-  const IMPEX_EXPORT_DIR = new URL("generated-impex-export", import.meta.url)
-    .pathname;
+  const IMPEX_EXPORT_DIR = new URL('generated-impex-export', import.meta.url).pathname;
 
   // delete already existing directory if it exists
   try {
@@ -142,38 +134,26 @@ async function main() {
   // convert html files to gutenberg annotated block content
   for (const htmlResource of htmlResources) {
     // transform html body to gutenberg annotated block content
-    htmlResource.content = ImpexTransformer.transform(
-      await readFile(htmlResource.resource, "utf8"),
-      { path: htmlResource.resource }
-    );
+    htmlResource.content = ImpexTransformer.transform(await readFile(htmlResource.resource, 'utf8'), {
+      path: htmlResource.resource,
+    });
     // remember html metadata for later processing
-    htmlResource.title =
-      document.querySelector("head > title")?.textContent ?? "";
-    htmlResource.description =
-      document
-        .querySelector('head > meta[name="description"]')
-        ?.getAttribute("content") ?? "";
-    htmlResource.keywords = (
-      document
-        .querySelector('head > meta[name="keywords"]')
-        .getAttribute("content") ?? ""
-    )
+    htmlResource.title = document.querySelector('head > title')?.textContent ?? '';
+    htmlResource.description = document.querySelector('head > meta[name="description"]')?.getAttribute('content') ?? '';
+    htmlResource.keywords = (document.querySelector('head > meta[name="keywords"]').getAttribute('content') ?? '')
       .toLowerCase()
-      .split(" ");
+      .split(' ');
 
     // create ImpEx slice json content for this html file
-    const slice = impexSliceFactory.createSlice(
-      "content-exporter",
-      (factory, slice) => {
-        slice.data.posts[0]["wp:post_type"] = "page";
-        slice.data.posts[0].title = htmlResource.title;
-        slice.data.posts[0]["wp:post_excerpt"] = htmlResource.title;
-        slice.data.posts[0]["wp:post_content"] = htmlResource.content;
-        // @TODO: categories (aka keywords)
-        // @TODO: add navigation
-        return slice;
-      }
-    );
+    const slice = impexSliceFactory.createSlice('content-exporter', (factory, slice) => {
+      slice.data.posts[0]['wp:post_type'] = 'page';
+      slice.data.posts[0].title = htmlResource.title;
+      slice.data.posts[0]['wp:post_excerpt'] = htmlResource.title;
+      slice.data.posts[0]['wp:post_content'] = htmlResource.content;
+      // @TODO: categories (aka keywords)
+      // @TODO: add navigation
+      return slice;
+    });
 
     // compute ImpEx conform slice json file path
     const slicePath = join(IMPEX_EXPORT_DIR, slicePathGenerator.next().value);
@@ -188,25 +168,18 @@ async function main() {
   // make media files available as ImpEx slices
   for (const attachmentResource of attachmentResources) {
     // create ImpEx slice json content for this media file
-    const slice = impexSliceFactory.createSlice(
-      "attachment",
-      (factory, slice) => {
-        // apply relative path as content
-        slice.data = attachmentResource.resource.substring(
-          IMPEX_EXPORT_DIR.length + 1
-        );
+    const slice = impexSliceFactory.createSlice('attachment', (factory, slice) => {
+      // apply relative path as content
+      slice.data = attachmentResource.resource.substring(IMPEX_EXPORT_DIR.length + 1);
 
-        // compute unique image file=>[img[@src]] mapping for this attachment
-        let img2imgSrc_mapping = [
-          ...new Set(img2imgSrc_mappings[attachmentResource.resource] ?? []),
-        ];
+      // compute unique image file=>[img[@src]] mapping for this attachment
+      let img2imgSrc_mapping = [...new Set(img2imgSrc_mappings[attachmentResource.resource] ?? [])];
 
-        // add mapping to slice metadata
-        slice.meta["impex:post-references"] = img2imgSrc_mapping;
+      // add mapping to slice metadata
+      slice.meta['impex:post-references'] = img2imgSrc_mapping;
 
-        return slice;
-      }
-    );
+      return slice;
+    });
 
     // compute ImpEx conform slice json file path
     const slicePath = join(IMPEX_EXPORT_DIR, slicePathGenerator.next().value);
@@ -220,7 +193,7 @@ async function main() {
     // copy attachment file to target directory with ImpEx conform file name
     await copyFile(
       attachmentResource.resource,
-      slicePath.replace(".json", "-" + basename(attachmentResource.resource))
+      slicePath.replace('.json', '-' + basename(attachmentResource.resource)),
     );
   }
 
