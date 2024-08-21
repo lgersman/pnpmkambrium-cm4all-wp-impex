@@ -6,10 +6,22 @@
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "never"
   },
-  "eslint.validate": ["javascript", "javascriptreact", "html", "markdown", "json", "jsonc", "json5"],
+  "stylelint.validate": ["css", "scss"],
+  "stylelint.packageManager": "pnpm",
+  "[php]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
+  "eslint.validate": ["javascript", "javascriptreact", "json", "jsonc", "json5"],
   // enable globally (here: format on save)
   "editor.formatOnSave": true,
   // enable per-language (here: Prettier as formatter)
+  "intelephense.environment.includePaths": ["${workspaceFolder}/vendor"],
   "intelephense.files.exclude": [
     "**/.git/**",
     "**/.svn/**",
@@ -46,5 +58,8 @@
   },
   "cSpell.allowCompoundWords": true,
   "cSpell.language": "en,en-US",
-  "cSpell.ignoreWords": ["mdbook"]
+  "cSpell.ignoreWords": ["mdbook"],
+  "stylelint.config": {
+    "configBasedir": "${workspaceFolder}"
+  }
 }
