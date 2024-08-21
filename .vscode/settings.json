@@ -1,4 +1,8 @@
 {
+  // show workspace folder in editor tab label
+  "workbench.editor.labelFormat": "short",
+  // see https://github.com/prettier/plugin-php?tab=readme-ov-file#visual-studio-code
+  "prettier.documentSelectors": ["**/*.{js,jsx,ts,tsx,json,md,yaml,yml,php}"],
   "prettier.useEditorConfig": true,
   "editorconfig.generateAuto": false,
   "editor.codeActionsOnSave": {

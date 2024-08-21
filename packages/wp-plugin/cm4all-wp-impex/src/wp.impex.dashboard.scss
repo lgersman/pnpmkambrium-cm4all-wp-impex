@@ -2,7 +2,7 @@ button > svg {
   width: 21px;
 }
 
-// suppress focus outline on tabs
+/* suppress focus outline on tabs */
 .components-tab-panel__tabs-item.is-active:focus {
   box-shadow:
     inset 0 0 0 var(--wp-admin-border-width-focus) transparent,
@@ -10,13 +10,13 @@ button > svg {
 }
 
 .components-modal__screen-overlay {
-  // do not span over the wp admin menu on the left
+  /* do not span over the wp admin menu on the left */
   margin-left: 160px;
 
   &.blocking {
     cursor: wait;
 
-    // we cannot name it "error" because it is already used by the wp admin
+    /* we cannot name it "error" because it is already used by the wp admin */
     &.fault {
       cursor: inherit;
 
@@ -32,7 +32,7 @@ button > svg {
 
   .components-text-control__input,
   .components-textarea-control__input {
-    // fix input widths in rename export modal
+    /* fix input widths in rename export modal */
     width: calc(100% - 16px) !important;
   }
 }
@@ -62,7 +62,7 @@ button > svg {
   }
 }
 
-///     background-color: rgb(240, 240, 241);
+///     background-color: rgb(240, 240, 241);background-colorbackground-colorbackground-colorbackground-colorbackground-colorbackground-color
 ///
 ///
 
