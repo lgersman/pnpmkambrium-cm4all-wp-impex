@@ -82,5 +82,5 @@ impex-plugin-tests-interactive: wp-env-is-started
 .PHONY: impex-cli-tests
 impex-cli-tests: ARGS ?=
 impex-cli-tests: wp-env-is-started
-> # 2 options : either reuse the wp-env contaer (how is its name ?) or create a new one locally exclusively for impex-cli tests
+> # 2 options : either reuse the wp-env container (how is its name ?) or create a new one locally exclusively for impex-cli tests
 > $(MAKE) wp-env-sh CONTAINER='tests-wordpress' ARGS='XDEBUG_CONFIG="client_host=host.docker.internal" /var/www/html/wp-content/plugins/cm4all-wp-impex/vendor/bin/phpunit -c /var/www/html/impex-cli/tests/phpunit.xml $(ARGS)'
